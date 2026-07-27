@@ -1,0 +1,465 @@
+import type { CourseModule, Recipe } from '../../types/content'
+
+export const module12: CourseModule = {
+  id: 'm12',
+  number: 12,
+  stage: 2,
+  title: 'Pastry & Baking Fundamentals',
+  subtitle: 'Where cooking becomes chemistry',
+  description:
+    'Pastry is the discipline that makes every other kind of cooking more precise. Ratios replace instinct, grams replace handfuls, and the oven door stays shut. This module builds the five pillars — shortcrust and sweet paste, choux, rough puff, genoise sponge and pastry cream — plus caramel, and finishes by composing them into a plated dessert. What you learn about weighing, temperature and patience here flows backwards into all your savoury work.',
+  objectives: [
+    'Weigh every ingredient to the gram and understand why baking ratios are chemistry, not suggestion',
+    'Make, rest, roll and blind-bake shortcrust and sweet paste to a fully-coloured base',
+    'Produce choux paste that puffs hollow and crisp, and pipe it consistently',
+    'Laminate a rough puff through four letter-folds with visible butter layers',
+    'Bake a genoise, boil a proper pastry cream, take caramel to amber — and plate them as one composed dessert',
+  ],
+  difficulty: 4,
+  estimatedHours: 12,
+  prerequisites: ['m03'],
+  skillsUnlocked: [
+    'Weighing & ratio discipline',
+    'Shortcrust & blind baking',
+    'Choux paste',
+    'Rough puff lamination',
+    'Pastry cream, genoise & caramel',
+  ],
+  equipment: [
+    'Digital scales accurate to 1 g',
+    'Loose-based tart tin (23 cm) + baking beans or rice',
+    'Piping bag with 12 mm plain nozzle',
+    'Rolling pin and a cold work surface (marble or a chilled board)',
+    'Stand mixer or hand whisk with stamina',
+    'Fine sieve, silicone spatula, balloon whisk',
+    'Oven thermometer — trust it over the dial',
+    'Sugar/probe thermometer',
+  ],
+  ingredients: [
+    'Plain flour (2 kg) and cornflour',
+    'Unsalted butter (1 kg — pastry runs on it)',
+    'Caster sugar (1 kg) and icing sugar',
+    'A dozen fresh eggs',
+    'Full-cream milk (2 L) and thickened cream (600 ml)',
+    'Vanilla beans or good paste',
+    'Lemons and apples (firm — granny smith or pink lady)',
+    'Dark chocolate (70%, 200 g)',
+  ],
+  lessons: [
+    {
+      id: 'm12-l01',
+      title: 'Weighing discipline, shortcrust & the blind bake',
+      summary: 'Grams over cups, minimal gluten, full chilling — and a tart base baked to genuine colour before anything wet touches it.',
+      theory: [
+        {
+          heading: 'The scales are the recipe',
+          body: 'Savoury cooking forgives improvisation; baking punishes it. A cup of flour varies by 30% depending on how you scoop it, which is the difference between pastry and paste — so from this module on, every baking ingredient is weighed to the gram, eggs included (a "large" egg spans 50–65 g; crack, whisk and weigh when precision matters). Ratios are the deeper literacy: shortcrust is 3:2:1 flour:butter:water by weight, sweet paste swaps in sugar and egg, choux and genoise have their own fixed arithmetic. Learn the ratio and the recipe becomes portable to any quantity.\n\nTemperature is the other half of the discipline. Butter behaves as three different ingredients: cold and firm (flaky pastry), room-soft (creamed cakes), melted (dense moist crumbs). Recipes name a butter state for a reason, and an oven thermometer beats the dial — most home ovens lie by 10–20°C, which in pastry is the gap between golden and cinders.',
+        },
+        {
+          heading: 'Tender pastry is undeveloped gluten',
+          body: 'Shortcrust is tender precisely because gluten never gets going. Cold butter is rubbed or pulsed into flour until the mix looks like coarse breadcrumbs — the fat waterproofs the flour, blocking gluten formation — then the minimum of cold liquid brings it together. Overwork it or over-wet it and you develop elastic gluten: pastry that fights the pin, shrinks in the tin and eats tough. Handle it briefly, then rest it 30+ minutes in the fridge so what gluten did form can relax and the butter can re-chill.\n\nBlind baking — lining the raw shell with paper and weights, baking at 180°C for 20 minutes, then removing the weights for 8–12 minutes more — sets the case before a wet filling can swim into it. The pass mark is colour: an even biscuit-gold across the whole base, because pale pastry is raw pastry, and no filling will ever cook it further. Brushing the hot base with beaten egg for the last 2 minutes seals the pinholes against leaks.',
+        },
+      ],
+      demonstrations: [
+        {
+          title: 'Sweet paste, mixing to blind-baked shell',
+          steps: [
+            'Weigh everything first: 250 g plain flour, 125 g cold butter in 1 cm dice, 90 g icing sugar, 55 g whisked egg (weigh it), 2 g salt.',
+            'Rub or pulse the butter into the flour, sugar and salt to fine breadcrumbs — stop while distinct crumbs remain; a paste means the butter melted.',
+            'Add the egg and bring the dough together with as few movements as it takes and no kneading. Press into a disc, wrap, and rest 30+ minutes in the fridge.',
+            'Roll to 3 mm between sheets of baking paper, line the tin without stretching the dough (stretched pastry shrinks back), and leave 1 cm overhang. Chill the lined tin 20 minutes.',
+            'Line with scrunched baking paper and fill with beans to the rim. Bake at 180°C for 20 minutes, remove paper and beans, and bake 8–12 minutes more to even biscuit-gold.',
+            'Brush the hot base with beaten egg and return it for 2 minutes to seal, then trim the overhang flush with a sharp knife while warm.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          title: 'The ratio proof',
+          instructions: 'Make sweet paste twice in one week: once by the gram, rested fully; once deliberately sloppy — flour by cup, dough kneaded ten times, no rest. Blind-bake a small shell of each and compare shrinkage, tenderness and colour side by side. Keep the photos: this is the experiment that ends improvisation in baking.',
+          repeatPractice: 'Weigh every baking ingredient for the rest of the course — and carry the habit back into savoury work where ratios rule: brines (Module 10), pasta (Module 8), stock reductions. The scales stay on the bench.',
+        },
+      ],
+      recipeIds: ['r-m12-01'],
+      techniqueIds: ['t-shortcrust', 't-mise-en-place', 't-custard'],
+      troubleshooting: [
+        {
+          problem: 'Pastry shrinks down the sides of the tin in the oven',
+          cause: 'Gluten developed by overworking, then stretched into the tin and never rested.',
+          fix: 'Handle less, rest longer (30 minutes after mixing and 20 after lining), and ease the pastry into corners rather than pulling it. The 1 cm overhang, trimmed after baking, absorbs what shrinkage remains.',
+        },
+        {
+          problem: 'Soggy base under the filling',
+          cause: 'The blind bake stopped at pale, or the shell was never sealed before a wet filling.',
+          fix: 'Bake to real biscuit colour — bottom included; lift the paper and look — and egg-wash the hot base for the final 2 minutes. A filling cannot cook pastry.',
+        },
+      ],
+    },
+    {
+      id: 'm12-l02',
+      title: 'Choux & pastry cream: the twice-cooked pair',
+      summary: 'A cooked panade beaten with eggs that puffs hollow on steam, and the boiled custard that fills everything in classic pastry.',
+      theory: [
+        {
+          heading: 'Choux runs on steam',
+          body: 'Choux is the only pastry cooked twice. First the panade: water (or milk-and-water), butter, a pinch each of salt and sugar brought to a full boil, flour beaten in off the heat, then the paste dried over the flame for 2–3 minutes until it films the pan base and smells faintly nutty. That drying stage gelatinises the starch and drives off water so the paste can accept eggs. Second, the eggs: beaten in gradually off the heat, in four or five additions, until the paste is glossy and falls from a lifted spatula in a slow "V". Egg quantity is judged, not fixed — flour and evaporation vary, so the V is the spec, not the count.\n\nIn the oven, the water you left in the paste turns to steam and inflates each shell before the crust sets: 200°C for the first 15 minutes for the puff, then 170°C to dry the interior, and the door stays shut throughout — one early peek collapses the batch. Baked shells should feel light, sound hollow when tapped, and be dry inside; a skewer hole straight from the oven lets steam escape instead of softening the crumb.',
+        },
+        {
+          heading: 'Pastry cream must boil',
+          body: 'Pastry cream — crème pâtissière — is the custard that behaves, and it breaks the rule you learned with anglaise in Module 3. Anglaise scrambles past 84°C; pastry cream must reach a genuine boil, because the cornflour that stabilises it needs boiling temperature to gelatinise fully, and its starch also shields the yolks from curdling. Undercooked pastry cream tastes of raw starch and thins out overnight as an amylase enzyme from the yolks digests it — a full minute at the boil, whisking hard into the corners of the pan, deactivates that enzyme and sets the cream for good.\n\nThe method: infuse milk with vanilla; whisk yolks, sugar and cornflour to a smooth paste; temper with the hot milk; return everything to the pan and whisk without pause as it thickens suddenly, then keep whisking one more minute at the boil. Press cling film onto the surface, chill fast, and beat it smooth before piping. Ratio to memorise per 500 ml milk: 6 yolks, 100 g sugar, 40 g cornflour, 25 g butter.',
+        },
+      ],
+      demonstrations: [
+        {
+          title: 'Choux, panade to hollow shell',
+          steps: [
+            'Weigh: 125 ml water, 125 ml milk, 100 g butter, 150 g plain flour, 3 g salt, 5 g sugar, about 4 eggs (240 g whisked, added by judgement).',
+            'Bring liquid, butter, salt and sugar to a full rolling boil — the butter must be fully melted before the boil, or the ratio drifts through evaporation.',
+            'Off the heat, add all the flour at once and beat hard. Return to medium heat and dry the panade 2–3 minutes until it films the pan base.',
+            'Cool 5 minutes (eggs scramble in a hot panade), then beat in the egg in 4–5 additions, checking after each: stop at a glossy paste that falls in a slow V.',
+            'Pipe 4 cm rounds onto baking paper with a 12 mm nozzle, finishing each with a sideways flick; press down the peaks with a wet finger.',
+            'Bake at 200°C for 15 minutes, then 170°C for 15–20 until deep gold and hollow-sounding. Door shut throughout. Skewer each shell immediately and cool on a rack.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          title: 'The V-stage ladder',
+          instructions: 'Make one batch of choux and divide the panade in three before adding egg. Beat the first portion to just short of the V, the second to the V, the third past it to a slack ribbon. Pipe and bake all three labelled rows on one tray and compare puff, hollowness and spread. You will never mistake the V again.',
+          repeatPractice: 'Pipe choux once a fortnight until Module 14 — gougères (add 100 g grated gruyère to the finished paste) make the drill savoury and instantly useful for entertaining.',
+        },
+        {
+          title: 'Anglaise versus pâtissière',
+          instructions: 'On one bench session, make 250 ml of crème anglaise (Module 3 method, off at 84°C) and a half batch of pastry cream (boiled a full minute). Taste both warm, then both cold the next day. Note thickness, stability and mouthfeel — same ingredients, different chemistry, different jobs.',
+        },
+      ],
+      recipeIds: ['r-m12-02'],
+      techniqueIds: ['t-choux', 't-pastry-cream', 't-custard'],
+      troubleshooting: [
+        {
+          problem: 'Choux shells flat and dense, no hollow',
+          cause: 'Panade never dried, too much egg past the V, or the oven door opened during the puff.',
+          fix: 'Dry to the pan-film stage, add the last egg in halves with checks between, and treat the first 15 minutes as sealed. Flat batches still eat well split and filled — call them biscuits and move on.',
+        },
+        {
+          problem: 'Pastry cream turned thin and weepy overnight',
+          cause: 'It thickened but never truly boiled, so the yolks’ starch-digesting enzyme survived.',
+          fix: 'Cook to a visible boil and hold it there a full minute, whisking into the corners. It cannot curdle with that much starch aboard — be brave.',
+        },
+      ],
+    },
+    {
+      id: 'm12-l03',
+      title: 'Rough puff: lamination without the fear',
+      summary: 'Visible butter, four letter-folds, cold discipline — 80% of true puff pastry for 20% of the effort.',
+      theory: [
+        {
+          heading: 'Layers are steam engines',
+          body: 'Puff pastry rises because lamination builds alternating sheets of dough and butter: in the oven, the water in each butter layer flashes to steam and jacks the dough sheets apart, while the fat fries them crisp from inside. Classic puff seals a single butter block through six precise folds; rough puff cheats honestly — cold butter cubes are left visible in the dough, and four "letter-folds" (roll to a long rectangle, fold in thirds like a letter, turn 90°) smear those cubes into streaks that behave as layers. Four folds of three gives 81 theoretical layers: enough for tarts, galettes, sausage rolls and pie lids, which is most of what a cook ever needs.\n\nThe non-negotiable is cold. Butter must stay firm from first cube to oven door: if it softens it smears into the flour and you get shortcrust; if it melts you get a greasy slick. Work fast, use the fridge shamelessly — 20 minutes between every second fold, always before rolling out, always after shaping — and read the dough, not the clock: marbled streaks of butter visible in the raw sheet are the guarantee of layers in the bake.',
+        },
+        {
+          heading: 'Baking off: heat first, patience second',
+          body: 'Lamination is spent in the first minutes of baking, so the oven must be genuinely at temperature — 200–220°C verified with the oven thermometer — before the pastry goes in. A cool start melts the butter out before steam can lift the layers, leaving a flat, greasy bake sitting in its own fat. Bake on a preheated tray for bottom heat, and chill the shaped pastry for 20 minutes first: cold pastry into a hot oven is the whole game.\n\nCut edges matter more than they seem. A knife dragged through raw puff smears the layers shut along the cut, so slice with a single decisive press of a sharp blade, and never egg-wash over a cut edge — dried egg glues the layers and stunts the rise on that side. Bake until deeply golden and lift a corner: the base should be crisp and browned, because pale puff, like pale shortcrust, is raw in the middle no matter how tall it stands.',
+        },
+      ],
+      demonstrations: [
+        {
+          title: 'Rough puff in four folds',
+          steps: [
+            'Weigh: 250 g plain flour, 200 g very cold butter in 1.5 cm cubes, 4 g salt, about 120 ml iced water.',
+            'Toss the butter cubes through the flour and salt, then add the water and bring together into a shaggy, cube-studded slab — do not rub the butter in; the lumps are the point.',
+            'Roll on a floured surface to a 1 cm-thick rectangle three times longer than wide. Fold in thirds like a letter. That is fold one.',
+            'Turn 90°, roll and fold again — fold two. Wrap and rest 20 minutes in the fridge.',
+            'Repeat for folds three and four with the same turn each time, then rest at least 30 minutes before rolling to use.',
+            'Check your work: the raw sheet should show marbled butter streaks. Roll to 4 mm for tarts, cut with a single sharp press, chill 20 minutes, and bake at 210°C on a preheated tray.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          title: 'Layer census',
+          instructions: 'Bake two 8 cm squares from your rough puff: one straight from the fridge into a verified 210°C oven, one from room temperature into a cold-started oven. Compare height, then cut both in half and count visible layers in the cross-section. Photograph the two cut faces side by side — the pair of photos is the whole lesson.',
+          repeatPractice: 'Make a batch of rough puff monthly and freeze it in portions — it holds three months, and Module 14’s entertaining menus assume a slab is waiting. Fold count and fridge discipline get faster every batch.',
+        },
+      ],
+      recipeIds: ['r-m12-03'],
+      techniqueIds: ['t-lamination', 't-shortcrust', 't-mise-en-place'],
+      troubleshooting: [
+        {
+          problem: 'Butter smears through and the dough turns greasy while folding',
+          cause: 'The kitchen, the bench or your hands are too warm, or the folds ran too long without a fridge break.',
+          fix: 'Everything cold, always: chill the flour in summer, rest after every second fold, and roll on the coolest surface you own. If it smears mid-fold, stop, wrap, and give it 20 minutes — the fridge repairs almost everything in lamination.',
+        },
+        {
+          problem: 'Bake rose unevenly, lopsided and low on one side',
+          cause: 'Uneven rolling thickness, or egg wash dripped down a cut edge and glued it.',
+          fix: 'Roll from the centre outward, rotating often, and check thickness with your fingers at the corners. Wash tops only, stopping 5 mm from every cut edge.',
+        },
+      ],
+    },
+    {
+      id: 'm12-l04',
+      title: 'Genoise, caramel & the plated dessert',
+      summary: 'A whisked sponge with no raiser but air, sugar cooked to amber on colour not courage, and the module’s components composed on one plate.',
+      theory: [
+        {
+          heading: 'Genoise: aeration is the ingredient',
+          body: 'A genoise contains no baking powder — its entire rise is the air you whisk into whole eggs and sugar. Whisk them (over a gentle bain-marie to about 40°C if working by hand; warmth loosens the eggs and speeds the foam) until the mixture triples and reaches ribbon stage: lifted beaters leave a trail that sits on the surface for three seconds before sinking. Then the whole craft is not losing that air — sift the flour over in thirds and fold with a cutting motion from the bowl’s centre outward, and stream any melted butter down the side, folding just to combine. Every extra fold costs height.\n\nBake at 180°C without opening the door for the first 20 minutes; the sponge is done when it springs back from a fingertip and pulls from the tin sides. A genoise is deliberately lean and slightly dry — it is built to drink a flavoured syrup and carry cream, which is exactly the job it does in this lesson’s plated dessert.',
+        },
+        {
+          heading: 'Caramel, and composing the plate',
+          body: 'Caramel is controlled burning. Wet method: sugar and a third of its weight in water, boiled without stirring — stirring past the boil seeds crystals and turns the pot to rock — swirling only, until the colour moves from pale gold through amber toward mahogany. Colour is the only gauge that matters: pale is merely sweet, amber is complex, dark amber is bittersweet and one shade later is acrid. It keeps cooking off the heat, so pull it a shade early, and add cream off the flame in stages — it spits violently, so long sleeves and a deep pan. For a sauce: 200 g sugar, 70 ml water, then 150 ml warm cream and 50 g butter, plus 3 g of flaky salt if you want it salted.\n\nPlating a dessert is Module 6’s composition logic with sugar: one focal point (the filled choux or the cream-crowned sponge), sauce placed with intent — a confident swipe or a piped pool, never a drizzle from height — odd numbers, height at the centre, 30% of the plate left empty, and every element earning its place by flavour or texture. Temperature contrast is the dessert cook’s extra card: warm caramel against cold cream makes both taste louder.',
+        },
+      ],
+      demonstrations: [
+        {
+          title: 'Wet caramel to sauce, safely',
+          steps: [
+            'Measure 200 g caster sugar and 70 ml water into a deep, clean, heavy pan; set 150 ml warm cream and 50 g butter within reach.',
+            'Stir only until the sugar dissolves over medium heat, then do not stir again — swirl the pan by the handle instead.',
+            'Wash down any crystals on the pan wall with a wet pastry brush as it boils.',
+            'Watch the colour through pale gold to true amber — the shade of strong tea. Pull it one shade before the target; momentum finishes the job.',
+            'Off the heat, add the warm cream in three additions, standing back — it boils up ferociously — then whisk in the butter and salt.',
+            'Pour into a jug; it thickens as it cools. If it seizes into lumps, return it to low heat and stir — caramel forgives reheating, never stirring.',
+          ],
+        },
+      ],
+      exercises: [
+        {
+          title: 'The caramel colour card',
+          instructions: 'Cook 100 g of sugar and pull spoonfuls onto baking paper at four stages: pale gold, amber, deep amber, and one deliberate step too far. Cool, snap, and taste each shard in order. Write one word of flavour against each colour. This calibration is the difference between confidence and fear at the caramel pan.',
+          repeatPractice: 'Recook the colour card before any high-stakes caramel — brittle, croquembouche, tarte tatin. Colour judgement fades without practice; the card takes ten minutes to refresh.',
+        },
+        {
+          title: 'Plate it three ways',
+          instructions: 'Using the components of r-m12-04, plate the same dessert three different ways: sauce-first pool, sauce swipe, and deconstructed. Photograph all three, pick the strongest, and write two lines on why it won — focal point, negative space, height.',
+        },
+      ],
+      recipeIds: ['r-m12-04'],
+      techniqueIds: ['t-sponge', 't-caramel', 't-plating', 't-sauce-work'],
+      troubleshooting: [
+        {
+          problem: 'Genoise came out dense and barely 2 cm tall',
+          cause: 'Ribbon stage never reached, or the air was folded out with the flour — usually by stirring instead of cutting.',
+          fix: 'Whisk to a full three-second ribbon (warm the eggs to 40°C to help), sift the flour in thirds, and fold with a knife-edge cutting motion, stopping the moment the last streak disappears.',
+        },
+        {
+          problem: 'Caramel crystallised into a grainy mass mid-cook',
+          cause: 'Stirring after the boil, or stray sugar crystals on the pan wall seeding the syrup.',
+          fix: 'Swirl only, brush the walls down with a wet pastry brush, and start with a scrupulously clean pan. If it seizes, add a splash of water and re-dissolve — sugar is cheap; start the colour run again.',
+        },
+      ],
+    },
+  ],
+  commonMistakes: [
+    {
+      problem: 'Measuring by cups and eyeballing butter',
+      cause: 'Savoury habits imported into a chemistry lab.',
+      fix: 'Scales on the bench, everything in grams, eggs weighed when it matters. A cup of flour varies 30% between scoops; your pastry should not.',
+    },
+    {
+      problem: 'Warm hands, warm bench, warm butter',
+      cause: 'Working pastry at savoury-kitchen pace with no fridge breaks.',
+      fix: 'The fridge is a tool, not a pause. Rest after mixing, after rolling, after shaping — and the moment butter shines or smears, stop and chill. Cold dough into a hot oven, every time.',
+    },
+    {
+      problem: 'Opening the oven to check',
+      cause: 'Reasonable curiosity, catastrophic timing — steam-risen bakes set their structure in the first minutes.',
+      fix: 'Oven light and the window for the first 15 minutes of anything choux, puff or sponge. If your oven runs uneven, rotate once, fast, after the structure is set.',
+    },
+    {
+      problem: 'Stopping at blond — pastry, choux and caramel all pulled pale',
+      cause: 'Fear of burning, so everything stops ten shades early.',
+      fix: 'Colour is flavour in pastry exactly as browning was on meat. Biscuit-gold bases, deep-gold choux, true amber caramel. Go one shade past comfortable and taste the difference.',
+    },
+  ],
+  assessment: {
+    id: 'as-m12',
+    moduleId: 'm12',
+    title: 'The Plated Dessert',
+    brief:
+      'In one 3-hour session (pastry cream and rough puff may be made ahead — scheduling components is part of the craft): produce (1) three filled choux with boiled vanilla pastry cream; (2) one blind-baked sweet-paste shell, biscuit-gold across the base; (3) an amber caramel sauce; and (4) compose a plated dessert for two using at least three module components with deliberate sauce work and a stated focal point. Weigh every ingredient; keep your written weights sheet.',
+    rubric: [
+      { criterion: 'Pastry fundamentals', maxScore: 10, guidance: '9–10: sweet-paste shell evenly biscuit-gold, no shrinkage or sogginess; choux hollow, crisp, evenly piped. 6–8: minor pallor or unevenness. Below 6: raw-pale bases or collapsed shells.' },
+      { criterion: 'Pastry cream', maxScore: 8, guidance: 'Genuinely boiled one full minute; thick, glossy, lump-free, holding a piped shape; clean vanilla flavour with no raw-starch taste.' },
+      { criterion: 'Caramel control', maxScore: 8, guidance: 'True amber by eye, no crystallisation, cream added safely off heat; sauce fluid when warm, coating when cool; bitterness balanced, not accidental.' },
+      { criterion: 'Composition & plating', maxScore: 8, guidance: 'Focal point stated and delivered; sauce placed with intent; height, odd numbers and 30% negative space; every element earns its plate.' },
+      { criterion: 'Weighing & process discipline', maxScore: 6, guidance: 'Every ingredient weighed with the sheet to prove it; fridge rests honoured; oven verified with a thermometer; station clean through a long session.' },
+    ],
+    passScore: 28,
+    evidence: 'Four photos: the blind-baked shell (base visible), a choux shell split to show the hollow, the caramel at its pulled colour, and the finished plated dessert. Include your weights sheet.',
+  },
+  completionCriteria: [
+    'All four lessons marked complete',
+    'The ratio-proof and caramel colour-card exercises done with photos kept',
+    'All four module recipes baked, with weights sheets retained',
+    'Assessment passed (28/40 or better) with photo evidence and the weights sheet',
+  ],
+}
+
+export const module12Recipes: Recipe[] = [
+  {
+    id: 'r-m12-01',
+    title: 'Classic Lemon Tart',
+    moduleId: 'm12',
+    description:
+      'The pastry cook’s exam in one dish: a sweet-paste shell blind-baked to biscuit-gold, sealed, and filled with a just-set lemon custard baked at nerve-testingly low heat. Sharp, silky and unforgiving of shortcuts — which is why it teaches so much.',
+    difficulty: 4,
+    serves: 6,
+    timeMins: 150,
+    techniqueIds: ['t-shortcrust', 't-custard', 't-acid-balance', 't-mise-en-place'],
+    ingredients: [
+      { item: 'Plain flour', qty: 250, unit: 'g' },
+      { item: 'Unsalted butter, cold', qty: 125, unit: 'g', prep: '1 cm dice' },
+      { item: 'Icing sugar', qty: 90, unit: 'g' },
+      { item: 'Fine salt', qty: 2, unit: 'g' },
+      { item: 'Whisked egg (for the pastry)', qty: 55, unit: 'g', prep: 'crack, whisk, weigh' },
+      { item: 'Eggs (for the filling)', qty: 5, unit: 'each' },
+      { item: 'Caster sugar', qty: 150, unit: 'g' },
+      { item: 'Lemons', qty: 4, unit: 'each', prep: 'zest of 2, 150 ml juice' },
+      { item: 'Thickened cream', qty: 150, unit: 'ml' },
+      { item: 'Egg (for sealing)', qty: 1, unit: 'each', prep: 'beaten' },
+    ],
+    method: [
+      'Weigh everything before touching anything — the weights sheet is part of the recipe. Make the sweet paste: rub the butter into the flour, icing sugar and salt to fine breadcrumbs, bring together with the 55 g of egg, press into a disc and rest 30 minutes in the fridge.',
+      'Roll to 3 mm between paper, line a 23 cm loose-based tin without stretching, leave 1 cm overhang, and chill the lined tin 20 minutes.',
+      'Blind-bake at 180°C: 20 minutes with paper and beans, then 8–12 minutes bare, until the base is an even biscuit-gold. Brush the hot base with beaten egg and bake 2 minutes more to seal. Drop the oven to 130°C.',
+      'Filling while the shell bakes: whisk the eggs and caster sugar until just combined — no froth; air makes bubbles in the baked custard. Stir in the juice, zest and cream, rest 10 minutes, then skim the foam and strain through a fine sieve into a jug.',
+      'Set the shell on its tray in the oven, then pour the filling in — filling at the oven, not the bench, is how it arrives without a tidal wave over the pastry.',
+      'Bake at 130°C for 30–40 minutes until the edges are set but the centre wobbles like just-set jelly when the tray is nudged. It finishes setting as it cools — a fully-set centre in the oven is overbaked.',
+      'Cool completely at room temperature (2 hours) before trimming the overhang flush and unmoulding. Refrigerate only after fully cool.',
+      'Slice with a hot dry knife, wiped between cuts. Taste critically: the filling should hit sharp then sweet, and the base should snap, not bend.',
+    ],
+    chefNotes: [
+      'The custard obeys Module 3 rules at pastry scale: eggs set the filling between 75–84°C, and the low oven plus the wobble-test keeps you under the curdling line. If the surface souffles or weeps, the oven ran hot.',
+      'Rest and strain the filling — ten patient minutes lets the zest infuse and the bubbles rise, and the sieve catches what would have been flecks and foam on your glass-smooth surface.',
+    ],
+    reinforces: ['Custard temperature discipline from Module 3', 'Weighing and resting habits', 'Acid balance from Module 2'],
+  },
+  {
+    id: 'r-m12-02',
+    title: 'Profiteroles with Vanilla Pastry Cream & Warm Chocolate Sauce',
+    moduleId: 'm12',
+    description:
+      'The choux drill with its classic reward: hollow shells piped to a uniform size, filled with properly boiled crème pâtissière, and sauced at the table with warm dark chocolate. Uniformity is the hidden test — twelve shells, one size.',
+    difficulty: 3,
+    serves: 6,
+    timeMins: 120,
+    techniqueIds: ['t-choux', 't-pastry-cream', 't-sauce-work'],
+    ingredients: [
+      { item: 'Water', qty: 125, unit: 'ml' },
+      { item: 'Full-cream milk (for choux)', qty: 125, unit: 'ml' },
+      { item: 'Unsalted butter', qty: 100, unit: 'g', prep: 'cubed' },
+      { item: 'Plain flour', qty: 150, unit: 'g', prep: 'sifted' },
+      { item: 'Fine salt', qty: 3, unit: 'g' },
+      { item: 'Caster sugar (for choux)', qty: 5, unit: 'g' },
+      { item: 'Eggs', qty: 4, unit: 'each', prep: 'whisked — about 240 g, added by judgement' },
+      { item: 'Full-cream milk (for the cream)', qty: 500, unit: 'ml' },
+      { item: 'Vanilla bean', qty: 1, unit: 'each', prep: 'split and scraped, or 10 g paste' },
+      { item: 'Egg yolks', qty: 6, unit: 'each' },
+      { item: 'Caster sugar (for the cream)', qty: 100, unit: 'g' },
+      { item: 'Cornflour', qty: 40, unit: 'g' },
+      { item: 'Dark chocolate (70%)', qty: 150, unit: 'g', prep: 'chopped' },
+      { item: 'Thickened cream', qty: 150, unit: 'ml' },
+    ],
+    method: [
+      'Pastry cream first — it needs chilling time. Infuse the milk with the vanilla to a simmer, lidded, 10 minutes. Whisk yolks, sugar and cornflour to a smooth pale paste.',
+      'Temper the hot milk into the yolks in a stream, return everything to the pan, and whisk without pause over medium heat: it thickens suddenly, then must boil a full minute while you whisk into the corners. Beat in 25 g of butter off the heat if you like it richer, press film onto the surface, and chill fast.',
+      'Choux: bring water, milk, butter, salt and sugar to a rolling boil. Off the heat, beat in all the flour at once, then dry the panade over medium heat 2–3 minutes until it films the pan base.',
+      'Cool 5 minutes, then beat in the egg in 4–5 additions to a glossy paste that falls from the spatula in a slow V — judge, don’t count.',
+      'Pipe twelve 4 cm rounds with a 12 mm nozzle onto paper, evenly spaced, peaks pressed down with a wet finger. Uniform size means uniform bake.',
+      'Bake at 200°C for 15 minutes — door shut — then 170°C for 15–20 until deep gold and hollow when tapped. Skewer each shell immediately and cool on a rack.',
+      'Chocolate sauce: heat the cream to a simmer, pour over the chopped chocolate, stand 1 minute, and stir from the centre out to a glossy pourable sauce. Hold warm.',
+      'Assemble at the last minute: beat the chilled pastry cream smooth, pipe it into each shell through the skewer hole (or split and fill), stack in odd-numbered pyramids, and pour the warm sauce over at the table — warm against cold is the point.',
+    ],
+    chefNotes: [
+      'Fill as late as you can — pastry cream starts softening the shells within the hour. For a party, bake and skewer the shells in the morning, re-crisp 5 minutes at 160°C, and fill just before serving.',
+      'Weigh your whisked egg before adding it and note how much the V actually took; your flour and your evaporation are yours alone, and next batch you will hit the stage faster.',
+    ],
+    reinforces: ['Tempering technique from Module 3', 'Piping consistency', 'Serving temperature contrast'],
+  },
+  {
+    id: 'r-m12-03',
+    title: 'Apple Tarte Fine with Rough Puff & Salted Caramel Glaze',
+    moduleId: 'm12',
+    description:
+      'A thin, elegant tart that shows lamination honestly: your own rough puff rolled to 4 mm, shingled with fanned apple, baked hard and glazed with salted caramel. Flat where it should be flat, risen where it should rise — the pastry does the talking.',
+    difficulty: 4,
+    serves: 6,
+    timeMins: 150,
+    techniqueIds: ['t-lamination', 't-caramel', 't-plating'],
+    ingredients: [
+      { item: 'Plain flour', qty: 250, unit: 'g' },
+      { item: 'Unsalted butter, very cold', qty: 200, unit: 'g', prep: '1.5 cm cubes' },
+      { item: 'Fine salt', qty: 4, unit: 'g' },
+      { item: 'Iced water', qty: 120, unit: 'ml', prep: 'approximately — add by feel' },
+      { item: 'Firm apples (granny smith or pink lady)', qty: 4, unit: 'each', prep: 'peeled, halved, cored, sliced 2 mm' },
+      { item: 'Caster sugar (for the apples)', qty: 30, unit: 'g' },
+      { item: 'Butter, melted (for brushing)', qty: 30, unit: 'g' },
+      { item: 'Caster sugar (for the caramel)', qty: 150, unit: 'g' },
+      { item: 'Water (for the caramel)', qty: 50, unit: 'ml' },
+      { item: 'Thickened cream, warm', qty: 100, unit: 'ml' },
+      { item: 'Flaky salt', qty: 3, unit: 'g' },
+      { item: 'Egg', qty: 1, unit: 'each', prep: 'beaten, for the border' },
+    ],
+    method: [
+      'Rough puff: toss the butter cubes through the flour and salt, add the iced water, and bring together into a shaggy cube-studded slab. Four letter-folds with a 90° turn each time, resting 20 minutes in the fridge after folds two and four. Rest 30 minutes before using — streaks of butter should be visible.',
+      'Roll the pastry to 4 mm and cut a 24 cm circle with a single decisive press around a plate — no dragging. Transfer to a paper-lined tray and prick the centre all over with a fork, leaving a 2 cm border unpricked.',
+      'Shingle the apple slices in tight overlapping circles inside the border — each slice half-covering the last; generosity here is what makes the fan. Chill the built tart 20 minutes while the oven and a second tray heat to 210°C.',
+      'Brush the apples with melted butter and scatter the 30 g of sugar over the fruit only. Egg-wash the border, keeping well clear of the cut edge.',
+      'Slide the tart, paper and all, onto the preheated tray. Bake 30–35 minutes until the border is deeply risen and golden and the apple edges are catching colour. Lift a corner: the base must be browned and crisp.',
+      'Caramel glaze while it bakes: sugar and water to true amber, swirling never stirring, then the warm cream off the heat in stages, and the flaky salt. Keep it warm and pourable.',
+      'Brush or drizzle the warm caramel over the hot apples the moment the tart leaves the oven — it soaks the fruit and lacquers as it cools. Rest 10 minutes on a rack so the base stays crisp.',
+      'Serve barely warm, cut with a sharp knife in single presses. The cross-section is your report card: distinct layers below, glassy fruit above.',
+    ],
+    chefNotes: [
+      'The pricked centre vents steam so the middle stays flat under the fruit while the unpricked border puffs into a frame — one fork, two behaviours, all deliberate.',
+      'A tarte fine is thin by definition: resist piling the apples. Two millimetre slices, tightly shingled, one layer — the elegance is in the restraint, and thick-cut fruit waterlogs the pastry.',
+    ],
+    reinforces: ['Knife consistency from Module 1 (2 mm slices)', 'Cold-chain discipline', 'Caramel colour judgement'],
+  },
+  {
+    id: 'r-m12-04',
+    title: 'Plated Dessert: Genoise, Vanilla Cream, Caramel & Roasted Apple',
+    moduleId: 'm12',
+    description:
+      'The module’s capstone plate: syrup-soaked genoise, piped pastry cream, amber caramel sauce and caramel-roasted apple, composed with the plating logic of the savoury course. Four components, one focal point, and every skill from the last three lessons on a single plate.',
+    difficulty: 4,
+    serves: 6,
+    timeMins: 150,
+    techniqueIds: ['t-sponge', 't-pastry-cream', 't-caramel', 't-plating'],
+    ingredients: [
+      { item: 'Eggs (for the genoise)', qty: 4, unit: 'each', prep: 'at room temperature' },
+      { item: 'Caster sugar (for the genoise)', qty: 120, unit: 'g' },
+      { item: 'Plain flour', qty: 120, unit: 'g', prep: 'sifted twice' },
+      { item: 'Unsalted butter, melted and cooled', qty: 30, unit: 'g' },
+      { item: 'Caster sugar (for the syrup)', qty: 50, unit: 'g' },
+      { item: 'Water (for the syrup)', qty: 50, unit: 'ml' },
+      { item: 'Lemon', qty: 0.5, unit: 'each', prep: 'juiced, for the syrup' },
+      { item: 'Full-cream milk', qty: 500, unit: 'ml' },
+      { item: 'Vanilla bean', qty: 1, unit: 'each', prep: 'split and scraped' },
+      { item: 'Egg yolks', qty: 6, unit: 'each' },
+      { item: 'Caster sugar (for the cream)', qty: 100, unit: 'g' },
+      { item: 'Cornflour', qty: 40, unit: 'g' },
+      { item: 'Caster sugar (for the caramel)', qty: 200, unit: 'g' },
+      { item: 'Thickened cream, warm', qty: 150, unit: 'ml' },
+      { item: 'Butter (for caramel and apples)', qty: 80, unit: 'g' },
+      { item: 'Firm apples', qty: 3, unit: 'each', prep: 'peeled, cut into 8 wedges each' },
+    ],
+    method: [
+      'Sequence the session before you start: pastry cream first (it chills), then genoise (it cools), then caramel and apples (they serve warm). Write the running order down — component scheduling is the skill being examined.',
+      'Pastry cream: infuse the milk with vanilla; whisk yolks, 100 g sugar and cornflour smooth; temper, return, and boil a full minute whisking hard. Film the surface, chill fast.',
+      'Genoise: whisk the eggs and 120 g sugar over a gentle bain-marie to about 40°C, then off the heat to full ribbon stage — the trail sits three seconds. Fold in the sifted flour in thirds with a cutting motion, stream the melted butter down the bowl’s side, and fold just to combine.',
+      'Bake in a lined 20 cm square tin at 180°C for 20–25 minutes until it springs back and pulls from the sides. Cool on a rack. Boil the syrup ingredients for 1 minute and cool.',
+      'Caramel: 200 g sugar with 70 ml water to true amber, swirling only; off the heat, add the warm cream in stages, then 50 g butter. Hold warm and pourable.',
+      'Roast the apples: brown the remaining 30 g butter in a wide pan, add the wedges in one layer, and cook over medium-high 6–8 minutes, turning once, until deep gold and just tender. Spoon in 2 tablespoons of the caramel for the last minute to glaze.',
+      'Cut the genoise into 3 × 9 cm rectangles (two per plate), brush generously with syrup — a genoise is built to drink — and beat the chilled pastry cream smooth into a piping bag.',
+      'Plate for six: a confident swipe of caramel off-centre, syrup-soaked sponge across it, piped bulbs of cream along the sponge in odd numbers, three glazed apple wedges leaning for height, and a final thread of warm caramel. Wipe every rim. The apple is warm, the cream is cold — serve immediately.',
+    ],
+    chefNotes: [
+      'Two-thirds of this dish can be made a day ahead (cream, sponge, caramel) — only the apples and assembly are à la minute. That make-ahead split is exactly how restaurant dessert sections run, and how you should run dinner parties from now on.',
+      'Taste the components together before plating service: a spoon of cream with a scrap of sponge and caramel. The caramel’s bitterness must balance the cream’s sweetness — adjust with flaky salt in the caramel, not sugar in the cream.',
+    ],
+    reinforces: ['Plating composition from Module 6', 'Mise en place and session sequencing', 'Structured tasting before service'],
+  },
+]

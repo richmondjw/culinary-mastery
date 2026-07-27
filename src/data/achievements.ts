@@ -1,0 +1,26 @@
+import type { Achievement } from '../types/content'
+
+export const achievements: Achievement[] = [
+  { id: 'a-first-lesson', title: 'Apron On', description: 'Complete your first lesson.', icon: 'BookOpen', condition: { type: 'lessons-completed', count: 1 } },
+  { id: 'a-first-recipe', title: 'First Service', description: 'Cook your first course recipe.', icon: 'ChefHat', condition: { type: 'recipes-cooked', count: 1 } },
+  { id: 'a-knife-pass', title: 'Sharp Edge', description: 'Pass the knife skills assessment.', icon: 'Sword', condition: { type: 'assessment-passed', moduleId: 'm01' } },
+  { id: 'a-ten-recipes', title: 'Line Cook', description: 'Cook 10 recipes from the course.', icon: 'Flame', condition: { type: 'recipes-cooked', count: 10 } },
+  { id: 'a-stock-pot', title: 'Liquid Gold', description: 'Complete the stocks module.', icon: 'Soup', condition: { type: 'module-completed', moduleId: 'm04' } },
+  { id: 'a-saucier', title: 'Saucier', description: 'Complete the sauces module.', icon: 'Droplets', condition: { type: 'module-completed', moduleId: 'm05' } },
+  { id: 'a-stage-1', title: 'Foundations Laid', description: 'Complete every Stage 1 module.', icon: 'Landmark', condition: { type: 'stage-completed', stage: 1 } },
+  { id: 'a-25-recipes', title: 'Chef de Partie', description: 'Cook 25 recipes from the course.', icon: 'Utensils', condition: { type: 'recipes-cooked', count: 25 } },
+  { id: 'a-fish', title: 'Poissonnier', description: 'Complete the fish & shellfish module.', icon: 'Fish', condition: { type: 'module-completed', moduleId: 'm09' } },
+  { id: 'a-butcher', title: 'Butcher’s Eye', description: 'Complete the meat module.', icon: 'Beef', condition: { type: 'module-completed', moduleId: 'm11' } },
+  { id: 'a-pastry', title: 'Pâtissier', description: 'Complete the pastry module.', icon: 'Croissant', condition: { type: 'module-completed', moduleId: 'm12' } },
+  { id: 'a-stage-2', title: 'Protein & Crumb', description: 'Complete every Stage 2 module.', icon: 'Medal', condition: { type: 'stage-completed', stage: 2 } },
+  { id: 'a-plating', title: 'The Pass', description: 'Complete the plating module.', icon: 'CircleDot', condition: { type: 'module-completed', moduleId: 'm14' } },
+  { id: 'a-stage-3', title: 'Craftsperson', description: 'Complete every Stage 3 module.', icon: 'Sparkles', condition: { type: 'stage-completed', stage: 3 } },
+  { id: 'a-five-assessments', title: 'Examined', description: 'Pass five module assessments.', icon: 'ClipboardCheck', condition: { type: 'assessments-passed', count: 5 } },
+  { id: 'a-first-costing', title: 'Bean Counter', description: 'Build your first recipe costing sheet.', icon: 'Calculator', condition: { type: 'costing-sheets-created', count: 1 } },
+  { id: 'a-first-menu', title: 'Menu on the Door', description: 'Design your first menu.', icon: 'ScrollText', condition: { type: 'menus-designed', count: 1 } },
+  { id: 'a-stage-4', title: 'Operator', description: 'Complete every Stage 4 module.', icon: 'Briefcase', condition: { type: 'stage-completed', stage: 4 } },
+  { id: 'a-journal-10', title: 'Kitchen Diary', description: 'Write 10 notes in your journal.', icon: 'NotebookPen', condition: { type: 'notes-written', count: 10 } },
+  { id: 'a-photos-10', title: 'Pass Photographer', description: 'Add 10 photos of your cooking.', icon: 'Camera', condition: { type: 'photos-added', count: 10 } },
+  { id: 'a-50-recipes', title: 'Sous Chef', description: 'Cook 50 recipes from the course.', icon: 'Award', condition: { type: 'recipes-cooked', count: 50 } },
+  { id: 'a-capstone', title: 'Head Chef', description: 'Complete the capstone: design, cost and execute your menu.', icon: 'Crown', condition: { type: 'capstone-completed' } },
+]

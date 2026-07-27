@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  /* Manga paper: warm white with a faint halftone screentone. */
+  body {
+    @apply bg-parchment-50 text-ink-900 font-sans;
+    background-image: radial-gradient(rgba(15, 14, 13, 0.055) 1px, transparent 1.3px);
+    background-size: 13px 13px;
+  }
+  ::selection {
+    @apply bg-star-400 text-ink-900;
+  }
+  .font-display {
+    letter-spacing: 0.035em;
+  }
+}
+
+@layer components {
+  /* Comic panel: thick ink outline + hard offset shadow. */
+  .card {
+    @apply bg-white rounded-2xl border-2 border-ink-900 shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-ink-900 px-4 py-2 text-sm font-bold shadow-press transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-press disabled:active:translate-x-0 disabled:active:translate-y-0;
+  }
+  .btn-primary {
+    @apply btn bg-copper-600 text-white hover:bg-copper-500;
+  }
+  .btn-secondary {
+    @apply btn bg-white text-ink-900 hover:bg-star-400/30;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-transparent px-3 py-1.5 text-sm font-bold text-ink-500 transition-colors hover:text-copper-600 hover:bg-copper-50;
+  }
+  .input {
+    @apply w-full rounded-xl border-2 border-ink-900 bg-white px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-star-400 focus:ring-offset-1;
+  }
+  .label {
+    @apply block text-2xs font-bold uppercase tracking-wider text-ink-500 mb-1;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full border border-ink-900 px-2.5 py-0.5 text-2xs font-bold;
+  }
+  /* Speech-bubble variant for callouts. */
+  .bubble {
+    @apply relative bg-white rounded-2xl border-2 border-ink-900;
+  }
+  .bubble::after {
+    content: '';
+    @apply absolute -bottom-[10px] left-8 h-4 w-4 rotate-45 border-b-2 border-r-2 border-ink-900 bg-white;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+    background-image: none;
+  }
+}
