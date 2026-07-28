@@ -251,8 +251,11 @@
   /* Editable data grids: .input's 18px type and 16px side padding eat the whole
      cell at these column widths, clipping the value. Tighten inside table cells
      only — still a 44px target, still above the 14px meta floor. */
-  .quiet td .input {
+  .input-compact {
     @apply px-2 text-[17px] min-h-[44px];
+  }
+  .quiet td .input {
+    @apply input-compact;
   }
   /* An editable grid carries a control in every cell, so the readout table's
      16px cell padding pushes the computed columns off-screen. Halve it. */

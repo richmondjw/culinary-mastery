@@ -173,9 +173,9 @@ export default function Planner() {
                                 <Trash2 size={13} />
                               </button>
                             </div>
-                            <div className="mt-1.5 flex items-center gap-2 pl-6">
+                            <div className="mt-1.5 flex flex-wrap items-center gap-2 pl-6">
                               <input
-                                className="input !w-28 !py-0.5 text-sm"
+                                className="input input-compact !w-32"
                                 value={t.station}
                                 placeholder="station"
                                 onChange={(e) => patchTask(day.id, t.id, { station: e.target.value })}
@@ -183,13 +183,13 @@ export default function Planner() {
                               <input
                                 type="number"
                                 min={0}
-                                className="input !w-16 !py-0.5 text-sm"
+                                className="input input-compact !w-20"
                                 value={t.durationMins}
                                 onChange={(e) => patchTask(day.id, t.id, { durationMins: Number(e.target.value) })}
                               />
-                              <span className="text-sm text-ink-500">min</span>
+                              <span className="font-mono text-sm text-ink-500">min</span>
                               <input
-                                className="input flex-1 !py-0.5 text-sm"
+                                className="input input-compact w-full min-w-[180px] flex-1"
                                 value={t.holdNote ?? ''}
                                 placeholder="hold: container, temp, use-by"
                                 onChange={(e) => patchTask(day.id, t.id, { holdNote: e.target.value || undefined })}
@@ -248,18 +248,18 @@ export default function Planner() {
                           />
                           <input
                             type="time"
-                            className="input !w-28 !py-1"
+                            className="input input-compact !w-32"
                             value={s.time}
                             onChange={(e) => patchStep(s.id, { time: e.target.value })}
                           />
                           <input
-                            className={`input flex-1 !py-1 ${s.done ? 'line-through text-ink-500' : ''}`}
+                            className={`input input-compact w-full min-w-[200px] flex-1 ${s.done ? 'line-through text-ink-500' : ''}`}
                             value={s.action}
                             placeholder="e.g. Fire mains — pan on for fish, plates warming"
                             onChange={(e) => patchStep(s.id, { action: e.target.value })}
                           />
                           <input
-                            className="input !w-28 !py-1 text-sm"
+                            className="input input-compact !w-32"
                             value={s.station}
                             placeholder="station"
                             onChange={(e) => patchStep(s.id, { station: e.target.value })}

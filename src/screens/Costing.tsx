@@ -117,7 +117,7 @@ export default function Costing() {
               </div>
 
               <div className="card overflow-x-auto p-5">
-                <table className="grid-dense min-w-[800px]">
+                <table className="grid-dense min-w-[780px]">
                   <thead>
                     <tr>
                       <th>Ingredient</th>
@@ -134,7 +134,7 @@ export default function Costing() {
                       <tr key={line.id}>
                         <td>
                           <input
-                            className="input !py-1"
+                            className="input !min-w-[130px] !py-1"
                             value={line.ingredient}
                             placeholder="e.g. Chicken thigh"
                             onChange={(e) =>
@@ -149,7 +149,7 @@ export default function Costing() {
                               type="number"
                               min={0}
                               step={0.01}
-                              className="input !w-24 !py-1"
+                              className="input !w-20 !py-1"
                               value={line.packPrice}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, packPrice: Number(e.target.value) } : l)) })
@@ -163,14 +163,14 @@ export default function Costing() {
                               type="number"
                               min={0}
                               step={0.01}
-                              className="input !w-20 !py-1"
+                              className="input !w-16 !py-1"
                               value={line.packQty}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, packQty: Number(e.target.value) } : l)) })
                               }
                             />
                             <select
-                              className="input !w-[68px] !px-1 !py-1"
+                              className="input !w-[62px] !px-1 !py-1"
                               value={line.packUnit}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, packUnit: e.target.value as Unit } : l)) })
@@ -188,14 +188,14 @@ export default function Costing() {
                               type="number"
                               min={0}
                               step={0.01}
-                              className="input !w-20 !py-1"
+                              className="input !w-16 !py-1"
                               value={line.usedQty}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, usedQty: Number(e.target.value) } : l)) })
                               }
                             />
                             <select
-                              className="input !w-[68px] !px-1 !py-1"
+                              className="input !w-[62px] !px-1 !py-1"
                               value={line.usedUnit}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, usedUnit: e.target.value as Unit } : l)) })
@@ -212,7 +212,7 @@ export default function Costing() {
                             type="number"
                             min={1}
                             max={100}
-                            className="input !w-20 !py-1"
+                            className="input !w-16 !py-1"
                             value={line.yieldPct}
                             onChange={(e) =>
                               patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, yieldPct: Number(e.target.value) } : l)) })

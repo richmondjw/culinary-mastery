@@ -170,7 +170,7 @@ export default function MenuDesigner() {
                     <p className="text-sm text-ink-500">No dishes yet.</p>
                   ) : (
                     <div className="overflow-x-auto">
-                      <table className="grid-dense min-w-[900px]">
+                      <table className="grid-dense min-w-[940px]">
                         <thead>
                           <tr>
                             <th>Dish</th>
@@ -191,7 +191,7 @@ export default function MenuDesigner() {
                               <tr key={dish.id}>
                                 <td>
                                   <input
-                                    className="input !py-1"
+                                    className="input !min-w-[140px] !py-1"
                                     value={dish.name}
                                     placeholder="Dish name"
                                     onChange={(e) => patchDish(course.id, dish.id, { name: e.target.value })}
@@ -199,7 +199,7 @@ export default function MenuDesigner() {
                                 </td>
                                 <td>
                                   <select
-                                    className="input !w-44 !py-1"
+                                    className="input !w-36 !py-1"
                                     value={dish.recipeId ?? ''}
                                     onChange={(e) => {
                                       const r = recipes.find((x) => x.id === e.target.value)
@@ -219,7 +219,7 @@ export default function MenuDesigner() {
                                 </td>
                                 <td>
                                   <select
-                                    className="input !w-40 !py-1"
+                                    className="input !w-32 !py-1"
                                     value={dish.costingSheetId ?? ''}
                                     onChange={(e) => patchDish(course.id, dish.id, { costingSheetId: e.target.value || undefined })}
                                   >
@@ -235,7 +235,7 @@ export default function MenuDesigner() {
                                       type="number"
                                       min={0}
                                       step={0.1}
-                                      className="input mt-1 !w-40 !py-1"
+                                      className="input mt-1 !w-32 !py-1"
                                       placeholder="portion cost $"
                                       value={dish.manualCost ?? ''}
                                       onChange={(e) =>
@@ -249,7 +249,7 @@ export default function MenuDesigner() {
                                     type="number"
                                     min={0}
                                     step={0.5}
-                                    className="input !w-28 !py-1"
+                                    className="input !w-24 !py-1"
                                     value={dish.sellPrice}
                                     onChange={(e) => patchDish(course.id, dish.id, { sellPrice: Number(e.target.value) })}
                                   />
@@ -258,7 +258,7 @@ export default function MenuDesigner() {
                                   <input
                                     type="number"
                                     min={0}
-                                    className="input !w-24 !py-1"
+                                    className="input !w-20 !py-1"
                                     value={dish.forecastSold}
                                     onChange={(e) => patchDish(course.id, dish.id, { forecastSold: Number(e.target.value) })}
                                   />
