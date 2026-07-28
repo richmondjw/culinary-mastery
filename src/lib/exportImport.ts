@@ -2,6 +2,7 @@ import { snapshotUserData, useUserStore, type UserData } from '../store/useUserS
 import { allPhotos, importPhotos } from './photos'
 
 interface BackupFile {
+  // Unchanged across the SIZZLE rename on purpose: older backups must still import.
   app: 'culinary-mastery'
   version: 1
   exportedAt: string
@@ -21,7 +22,7 @@ export async function exportBackup(): Promise<void> {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `culinary-mastery-backup-${new Date().toISOString().slice(0, 10)}.json`
+  a.download = `sizzle-backup-${new Date().toISOString().slice(0, 10)}.json`
   a.click()
   URL.revokeObjectURL(url)
 }
@@ -31,7 +32,7 @@ export async function importBackup(file: File): Promise<{ ok: boolean; message: 
     const text = await file.text()
     const parsed = JSON.parse(text) as Partial<BackupFile>
     if (parsed.app !== 'culinary-mastery' || !parsed.data) {
-      return { ok: false, message: 'Not a Culinary Mastery backup file.' }
+      return { ok: false, message: 'Not a SIZZLE backup file.' }
     }
     useUserStore.getState().importData(parsed.data as UserData)
     if (parsed.photos) await importPhotos(parsed.photos)

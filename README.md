@@ -1,4 +1,4 @@
-# Culinary Mastery
+# SIZZLE — cook louder
 
 A 19-module cooking course — from knife skills to designing, costing and executing a profitable restaurant menu — delivered as a local-first web app with progress tracking.
 

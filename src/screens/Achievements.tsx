@@ -71,15 +71,15 @@ export default function Achievements() {
             <div key={a.id} className={`card flex items-center gap-4 p-5 ${at ? '' : 'opacity-50 grayscale'}`}>
               <div
                 className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${
-                  at ? 'bg-amber-50 text-amber-600' : 'bg-parchment-100 text-ink-400'
+                  at ? 'border-2 border-ink-900 bg-star-400 text-ink-900' : 'bg-parchment-100 text-ink-500'
                 }`}
               >
                 <Icon size={22} />
               </div>
               <div className="min-w-0">
                 <div className="font-display text-base font-semibold">{a.title}</div>
-                <div className="text-xs text-ink-500">{a.description}</div>
-                <div className="mt-0.5 text-2xs text-ink-400">{at ? `Earned ${shortDate(at)}` : 'Locked'}</div>
+                <div className="text-sm text-ink-500">{a.description}</div>
+                <div className="mt-0.5 text-sm text-ink-500">{at ? `Earned ${shortDate(at)}` : 'Locked'}</div>
               </div>
             </div>
           )

@@ -9,10 +9,11 @@ import { money } from '../lib/format'
 import { useUserStore } from '../store/useUserStore'
 import type { CapstoneStepStatus } from '../types/state'
 
-const STATUS_META: Record<CapstoneStepStatus, { label: string; tone: 'neutral' | 'copper' | 'sage' }> = {
+// SIZZLE: colour is never the only signal — each status carries its own glyph via Pill.
+const STATUS_META: Record<CapstoneStepStatus, { label: string; tone: 'neutral' | 'streak' | 'pass' }> = {
   todo: { label: 'To do', tone: 'neutral' },
-  'in-progress': { label: 'In progress', tone: 'copper' },
-  done: { label: 'Done', tone: 'sage' },
+  'in-progress': { label: 'In progress', tone: 'streak' },
+  done: { label: 'Done', tone: 'pass' },
 }
 
 export default function Capstone() {
@@ -37,12 +38,12 @@ export default function Capstone() {
 
       {!unlocked && (
         <div className="mb-6 flex items-center gap-3 rounded-2xl bg-parchment-100 p-4 text-sm text-ink-500">
-          <Lock size={18} className="shrink-0 text-ink-400" />
+          <Lock size={18} className="shrink-0 text-ink-500" />
           <p>
             The capstone unlocks when Module 14 (Plating) and Module 18 (Costing) are complete. You can read ahead and
             sketch ideas, but the deliverables are designed to draw on every module before them.{' '}
             {m19 && (
-              <Link to="/modules/m19" className="font-semibold text-copper-600">
+              <Link to="/modules/m19" className="font-semibold text-copper-700">
                 See the capstone module →
               </Link>
             )}
@@ -73,7 +74,7 @@ export default function Capstone() {
                 <div className="flex items-center gap-2">
                   <Pill tone={meta.tone}>{meta.label}</Pill>
                   <select
-                    className="input !w-32 !py-1 text-xs"
+                    className="input !w-32 !py-1 text-sm"
                     value={status}
                     onChange={(e) => setStep(step.id, e.target.value as CapstoneStepStatus)}
                   >
@@ -84,17 +85,17 @@ export default function Capstone() {
                 </div>
               </div>
 
-              <div className="mt-3 rounded-xl bg-parchment-50 p-3 text-xs text-ink-700">
+              <div className="mt-3 rounded-xl bg-parchment-50 p-3 text-sm text-ink-700">
                 <strong>Deliverable:</strong> {step.deliverable}
               </div>
-              <ul className="mt-2 list-inside list-disc space-y-1 text-xs text-ink-500">
+              <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-ink-500">
                 {step.guidance.map((g, i) => (
                   <li key={i}>{g}</li>
                 ))}
               </ul>
               <div className="mt-3 flex flex-wrap items-center gap-3">
                 {step.toolRoute && (
-                  <Link to={step.toolRoute} className="btn-secondary !py-1.5 text-xs">
+                  <Link to={step.toolRoute} className="btn-secondary !py-1.5 text-sm">
                     Open tool <ArrowRight size={13} />
                   </Link>
                 )}
@@ -112,7 +113,7 @@ export default function Capstone() {
 
       <SectionTitle>
         <span className="mt-8 inline-flex items-center gap-2">
-          <Crown size={18} className="text-copper-500" /> Post-service review
+          <Crown size={18} className="text-copper-700" /> Post-service review
         </span>
       </SectionTitle>
       <section className="card grid grid-cols-1 gap-4 p-6 md:grid-cols-2">
@@ -141,7 +142,7 @@ export default function Capstone() {
         {review.plannedCost != null && review.actualCost != null && (
           <div className="md:col-span-2 rounded-xl bg-parchment-50 p-3 text-sm">
             Variance:{' '}
-            <strong className={review.actualCost > review.plannedCost ? 'text-wine-600' : 'text-sage-600'}>
+            <strong className={review.actualCost > review.plannedCost ? 'text-wine-600' : 'text-sage-700'}>
               {money(review.actualCost - review.plannedCost)}
             </strong>{' '}
             ({review.plannedCost > 0 ? `${(((review.actualCost - review.plannedCost) / review.plannedCost) * 100).toFixed(1)}%` : '—'}) against

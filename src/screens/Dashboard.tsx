@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Award, BookOpen, ChefHat, ClipboardCheck, Crown, UtensilsCrossed } from 'lucide-react'
 import { PageHeader } from '../components/Layout'
-import { Pill, ProgressRing, SectionTitle, StatCard } from '../components/ui'
+import { Node, Pill, ProgressRing, SectionTitle, StatCard, TrackBadge } from '../components/ui'
 import { achievements, modules, stages } from '../data'
 import { capstoneSteps } from '../data/capstone'
 import {
@@ -14,6 +14,7 @@ import {
   stagePct,
   totalLessons,
   totalRecipes,
+  trackForStage,
 } from '../lib/progress'
 import { useUserStore } from '../store/useUserStore'
 import { shortDate } from '../lib/format'
@@ -80,7 +81,7 @@ export default function Dashboard() {
         <div className="card p-5">
           <h3 className="mb-3 font-display text-base font-semibold">Recent achievements</h3>
           {recentAchievements.length === 0 ? (
-            <p className="text-sm text-ink-400">Complete your first lesson to start earning.</p>
+            <p className="text-sm text-ink-500">Complete your first lesson to start earning.</p>
           ) : (
             <ul className="space-y-2.5">
               {recentAchievements.map(([id, date]) => {
@@ -88,19 +89,19 @@ export default function Dashboard() {
                 if (!a) return null
                 return (
                   <li key={id} className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-ink-900 bg-star-400 text-ink-900">
                       <Award size={15} />
                     </div>
                     <div className="min-w-0">
                       <div className="truncate text-sm font-semibold">{a.title}</div>
-                      <div className="text-2xs text-ink-400">{shortDate(date)}</div>
+                      <div className="text-sm text-ink-500">{shortDate(date)}</div>
                     </div>
                   </li>
                 )
               })}
             </ul>
           )}
-          <Link to="/achievements" className="mt-3 inline-block text-xs font-semibold text-copper-600 hover:text-copper-700">
+          <Link to="/achievements" className="mt-3 inline-block text-sm font-semibold text-copper-700 hover:text-copper-700">
             All achievements →
           </Link>
         </div>
@@ -110,19 +111,22 @@ export default function Dashboard() {
       <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {stages.map((st) => (
           <div key={st.id} className="card p-5">
-            <div className="flex items-center justify-between">
-              <div className="text-2xs font-semibold uppercase tracking-wider text-ink-400">Stage {st.id}</div>
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <TrackBadge track={trackForStage(st.id)} size={30} />
+                <div className="text-2xs font-mono font-medium uppercase tracking-[0.14em] text-ink-500">Stage {st.id}</div>
+              </div>
               <ProgressRing pct={stagePct(data, st.id)} size={44} stroke={4} />
             </div>
             <h3 className="mt-1 font-display text-base font-semibold">{st.name}</h3>
-            <p className="mt-1 text-xs text-ink-500">{st.tagline}</p>
+            <p className="mt-1 text-sm text-ink-500">{st.tagline}</p>
           </div>
         ))}
       </div>
 
       <SectionTitle
         right={
-          <Link to="/modules" className="text-xs font-semibold text-copper-600 hover:text-copper-700">
+          <Link to="/modules" className="text-sm font-semibold text-copper-700 hover:text-copper-700">
             Full curriculum →
           </Link>
         }
@@ -140,28 +144,27 @@ export default function Dashboard() {
                 to={`/modules/${m.id}`}
                 className="flex items-center gap-4 px-5 py-3 transition-colors hover:bg-parchment-50"
               >
-                <div
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-bold ${
-                    complete ? 'bg-sage-100 text-sage-700' : unlocked ? 'bg-copper-50 text-copper-700' : 'bg-parchment-100 text-ink-400'
-                  }`}
-                >
+                <Node state={complete ? 'done' : !unlocked ? 'locked' : m.id === current?.id ? 'current' : 'todo'}>
                   {m.number}
-                </div>
+                </Node>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <span className={`truncate text-sm font-semibold ${unlocked ? '' : 'text-ink-400'}`}>{m.title}</span>
-                    {complete && <Pill tone="sage">complete</Pill>}
-                    {!unlocked && <Pill tone="neutral">locked</Pill>}
-                    {m.id === 'm19' && <ChefHat size={14} className="text-copper-500" />}
+                    <span className={`truncate text-sm font-semibold ${unlocked ? '' : 'text-ink-500'}`}>{m.title}</span>
+                    {complete && <Pill tone="pass">complete</Pill>}
+                    {!unlocked && <Pill tone="locked">locked</Pill>}
+                    {m.id === 'm19' && <ChefHat size={14} className="text-copper-700" />}
                   </div>
-                  <div className="truncate text-2xs text-ink-400">{m.subtitle}</div>
+                  <div className="truncate text-sm text-ink-500">
+                    <span className="font-mono">M{m.number}</span> · {m.subtitle}
+                  </div>
                 </div>
                 <div className="hidden w-28 shrink-0 sm:block">
-                  <div className="h-1.5 overflow-hidden rounded-full bg-parchment-100">
-                    <div
-                      className={`h-full rounded-full ${complete ? 'bg-sage-500' : 'bg-copper-500'}`}
-                      style={{ width: `${modulePct(data, m)}%` }}
-                    />
+                  <div className="meter" title={`${modulePct(data, m)}% complete`}>
+                    {complete ? (
+                      <div className="meter-fill-done">✓ DONE</div>
+                    ) : (
+                      <div className="meter-fill" style={{ width: `${modulePct(data, m)}%` }} />
+                    )}
                   </div>
                 </div>
               </Link>

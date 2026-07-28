@@ -32,7 +32,9 @@ export default function Portfolio() {
   const capstoneDone = capstoneSteps.every((s) => data.capstone.steps[s.id] === 'done')
 
   return (
-    <div>
+    // SIZZLE quiet mode: this screen is printed. Halftone and offset shadows
+    // cost ink and add nothing on paper.
+    <div className="quiet">
       <PageHeader
         title="Portfolio"
         subtitle="The record of what you can do: dishes cooked, assessments passed, and the menu you designed, costed and served."
@@ -47,11 +49,11 @@ export default function Portfolio() {
         <div>
           <div className="font-display text-xl font-semibold">James Richmond</div>
           <div className="text-sm text-ink-500">
-            Culinary Mastery — {overallPct(data)}% complete · {completedModules.length}/{modules.length} modules ·{' '}
+            SIZZLE — {overallPct(data)}% complete · {completedModules.length}/{modules.length} modules ·{' '}
             {cooked.length} course recipes cooked
           </div>
         </div>
-        {capstoneDone && <Pill tone="gold">Capstone completed</Pill>}
+        {capstoneDone && <Pill tone="best">Capstone completed</Pill>}
       </div>
 
       {capstoneMenu && analysis && (
@@ -63,7 +65,7 @@ export default function Portfolio() {
             <div className="mx-auto max-w-xl space-y-5">
               {capstoneMenu.courses.map((c) => (
                 <div key={c.id}>
-                  <div className="mb-1 text-center text-2xs font-bold uppercase tracking-[0.2em] text-copper-600">{c.name}</div>
+                  <div className="mb-1 text-center text-2xs font-mono font-medium uppercase tracking-[0.2em] text-copper-700">{c.name}</div>
                   {c.dishes.map((d) => (
                     <div key={d.id} className="flex items-baseline justify-between gap-4 py-1">
                       <span className="text-sm font-medium">{d.name || 'Untitled dish'}</span>
@@ -73,7 +75,7 @@ export default function Portfolio() {
                 </div>
               ))}
             </div>
-            <div className="mt-5 border-t border-parchment-100 pt-3 text-center text-xs text-ink-400">
+            <div className="mt-5 border-t border-parchment-100 pt-3 text-center text-sm text-ink-500">
               Blended GP {pct(analysis.blendedGpPct)} · forecast gross profit {money(analysis.totalGpDollars)} per service of{' '}
               {capstoneMenu.covers}
             </div>
@@ -91,7 +93,7 @@ export default function Portfolio() {
           {photosWithCaption.map((p) => (
             <figure key={p.id} className="card overflow-hidden">
               <PhotoImg id={p.id} className="aspect-square w-full" />
-              <figcaption className="p-2 text-2xs text-ink-500">
+              <figcaption className="p-2 text-sm text-ink-500">
                 {p.caption || shortDate(p.date)}
               </figcaption>
             </figure>
@@ -104,7 +106,7 @@ export default function Portfolio() {
           <SectionTitle>Assessments passed</SectionTitle>
           <div className="card divide-y divide-parchment-100">
             {passedAttempts.length === 0 ? (
-              <p className="p-5 text-sm text-ink-400">None yet — Module 1&rsquo;s cut card awaits.</p>
+              <p className="p-5 text-sm text-ink-500">None yet — Module 1&rsquo;s cut card awaits.</p>
             ) : (
               passedAttempts.map((a) => {
                 const m = moduleById.get(a.moduleId)
@@ -112,9 +114,9 @@ export default function Portfolio() {
                   <div key={a.id} className="flex items-center justify-between gap-3 px-5 py-3">
                     <div>
                       <div className="text-sm font-semibold">{m ? `${m.number}. ${m.title}` : a.moduleId}</div>
-                      <div className="text-2xs text-ink-400">{shortDate(a.date)}</div>
+                      <div className="text-sm text-ink-500">{shortDate(a.date)}</div>
                     </div>
-                    <Pill tone="sage">
+                    <Pill tone="pass">
                       {a.total}/{a.maxTotal}
                     </Pill>
                   </div>
@@ -128,13 +130,13 @@ export default function Portfolio() {
           <SectionTitle>Recently cooked</SectionTitle>
           <div className="card divide-y divide-parchment-100">
             {cooked.length === 0 ? (
-              <p className="p-5 text-sm text-ink-400">Nothing yet — the soffritto is calling.</p>
+              <p className="p-5 text-sm text-ink-500">Nothing yet — the soffritto is calling.</p>
             ) : (
               cooked.slice(0, 12).map(({ recipe, date }) => (
                 <div key={recipe!.id} className="flex items-center justify-between gap-3 px-5 py-3">
                   <div className="min-w-0">
                     <div className="truncate text-sm font-semibold">{recipe!.title}</div>
-                    <div className="text-2xs text-ink-400">{shortDate(date)}</div>
+                    <div className="text-sm text-ink-500">{shortDate(date)}</div>
                   </div>
                 </div>
               ))

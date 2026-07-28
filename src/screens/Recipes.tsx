@@ -38,7 +38,7 @@ export default function Recipes() {
 
       <div className="mb-5 flex flex-wrap items-center gap-3">
         <div className="relative w-full sm:w-64">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-500" />
           <input className="input pl-9" placeholder="Search recipes…" value={q} onChange={(e) => setQ(e.target.value)} />
         </div>
         <select className="input w-full sm:w-56" value={moduleFilter} onChange={(e) => setModuleFilter(e.target.value)}>
@@ -71,14 +71,14 @@ export default function Recipes() {
           return (
             <Link key={r.id} to={`/recipes/${r.id}`} className="card group flex flex-col p-5 transition-shadow hover:shadow-lift">
               <div className="mb-1 flex items-center justify-between gap-2">
-                <span className="text-2xs font-semibold uppercase tracking-wider text-ink-400">
+                <span className="text-2xs font-mono font-medium uppercase tracking-[0.14em] text-ink-500">
                   Module {m?.number ?? '—'}
                 </span>
-                {cooked && <Pill tone="sage">cooked</Pill>}
+                {cooked && <Pill tone="pass">cooked</Pill>}
               </div>
               <h3 className="font-display text-base font-semibold leading-snug group-hover:text-copper-700">{r.title}</h3>
-              <p className="mt-1 line-clamp-2 flex-1 text-xs text-ink-500">{r.description}</p>
-              <div className="mt-3 flex items-center gap-3 text-2xs text-ink-400">
+              <p className="mt-1 line-clamp-2 flex-1 text-sm text-ink-500">{r.description}</p>
+              <div className="mt-3 flex items-center gap-3 text-sm text-ink-500">
                 <DifficultyDots level={r.difficulty} />
                 <span className="inline-flex items-center gap-1">
                   <Clock size={12} /> {mins(r.timeMins)}
@@ -91,7 +91,7 @@ export default function Recipes() {
           )
         })}
       </div>
-      {filtered.length === 0 && <p className="py-10 text-center text-sm text-ink-400">No recipes match those filters.</p>}
+      {filtered.length === 0 && <p className="py-10 text-center text-sm text-ink-500">No recipes match those filters.</p>}
     </div>
   )
 }

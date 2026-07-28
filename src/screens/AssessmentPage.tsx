@@ -51,7 +51,7 @@ export default function AssessmentPage() {
         <div className="text-sm text-ink-700">
           <strong>Evidence required:</strong> {a.evidence}
         </div>
-        <div className="mt-1 text-xs text-ink-400">
+        <div className="mt-1 text-sm text-ink-500">
           Score yourself honestly against each criterion once the session is done. Pass mark: {a.passScore}/{maxTotal}.
         </div>
       </div>
@@ -67,7 +67,7 @@ export default function AssessmentPage() {
             <div className="font-semibold">
               {submitted ? `Passed — ${total}/${maxTotal}. Well cooked.` : `Not yet — ${total}/${maxTotal}.`}
             </div>
-            <div className="text-xs opacity-80">
+            <div className="text-sm opacity-80">
               {submitted
                 ? 'The module is marked passed. Repetition still pays: retake it in a month and beat your score.'
                 : 'Review the common mistakes, practise the weakest criterion, and retake when ready. Attempts are kept.'}
@@ -87,7 +87,7 @@ export default function AssessmentPage() {
                   {scores[r.criterion] ?? 0}/{r.maxScore}
                 </div>
               </div>
-              <p className="mb-1.5 text-xs text-ink-400">{r.guidance}</p>
+              <p className="mb-1.5 text-sm text-ink-500">{r.guidance}</p>
               <input
                 type="range"
                 min={0}
@@ -95,7 +95,7 @@ export default function AssessmentPage() {
                 step={1}
                 value={scores[r.criterion] ?? 0}
                 onChange={(e) => setScores((s) => ({ ...s, [r.criterion]: Number(e.target.value) }))}
-                className="w-full accent-copper-600"
+                className="h-11 w-full accent-copper-600"
               />
             </div>
           ))}
@@ -123,7 +123,7 @@ export default function AssessmentPage() {
         <div className="mt-5 flex items-center justify-between border-t border-parchment-100 pt-4">
           <div className="font-display text-lg font-semibold">
             Total: {total}/{maxTotal}{' '}
-            <span className={`text-sm ${total >= a.passScore ? 'text-sage-600' : 'text-ink-400'}`}>
+            <span className={`text-sm ${total >= a.passScore ? 'text-sage-700' : 'text-ink-500'}`}>
               ({total >= a.passScore ? 'passing' : `pass at ${a.passScore}`})
             </span>
           </div>
@@ -140,13 +140,13 @@ export default function AssessmentPage() {
             {[...attempts].reverse().map((att) => (
               <div key={att.id} className="rounded-xl bg-parchment-50 p-3">
                 <div className="flex items-center gap-2 text-sm">
-                  {att.passed ? <Pill tone="sage">passed</Pill> : <Pill tone="wine">not passed</Pill>}
+                  {att.passed ? <Pill tone="pass">passed</Pill> : <Pill tone="retake">not passed</Pill>}
                   <span className="font-semibold">
                     {att.total}/{att.maxTotal}
                   </span>
-                  <span className="text-xs text-ink-400">{shortDate(att.date)}</span>
+                  <span className="text-sm text-ink-500">{shortDate(att.date)}</span>
                 </div>
-                {att.reflection && <p className="mt-1 text-xs text-ink-500">{att.reflection}</p>}
+                {att.reflection && <p className="mt-1 text-sm text-ink-500">{att.reflection}</p>}
                 <PhotoStrip ids={att.photoIds} />
               </div>
             ))}

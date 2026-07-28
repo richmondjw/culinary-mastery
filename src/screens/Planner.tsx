@@ -58,7 +58,9 @@ export default function Planner() {
   }
 
   return (
-    <div>
+    // SIZZLE quiet mode: dense operational screen — plain surfaces so the
+    // timings and stations read before the brand does.
+    <div className="quiet">
       <PageHeader
         title="Prep & service planner"
         subtitle="Work backwards from the moment guests sit down. Prep by day and station, then a minute-by-minute service timeline."
@@ -86,7 +88,7 @@ export default function Planner() {
                 }`}
               >
                 <div className="truncate">{p.name}</div>
-                <div className="text-2xs font-normal text-ink-400">
+                <div className="text-sm font-normal text-ink-500">
                   {p.days.reduce((s, d) => s + d.tasks.length, 0)} prep tasks · {p.service.length} service steps
                 </div>
               </button>
@@ -135,7 +137,7 @@ export default function Planner() {
                           value={day.label}
                           onChange={(e) => patchDay(day.id, { label: e.target.value })}
                         />
-                        <span className="inline-flex items-center gap-1 text-2xs text-ink-400">
+                        <span className="inline-flex items-center gap-1 text-sm text-ink-500">
                           <Clock size={12} /> {mins(total)}
                         </span>
                         <button
@@ -155,10 +157,10 @@ export default function Planner() {
                                 type="checkbox"
                                 checked={t.done}
                                 onChange={() => patchTask(day.id, t.id, { done: !t.done })}
-                                className="h-4 w-4 accent-copper-600"
+                                className="h-6 w-6 shrink-0 accent-copper-600"
                               />
                               <input
-                                className={`input !border-0 !bg-transparent !p-0 text-sm font-medium ${t.done ? 'line-through text-ink-400' : ''}`}
+                                className={`input !border-0 !bg-transparent !p-0 text-sm font-medium ${t.done ? 'line-through text-ink-500' : ''}`}
                                 value={t.title}
                                 placeholder="Task…"
                                 onChange={(e) => patchTask(day.id, t.id, { title: e.target.value })}
@@ -173,7 +175,7 @@ export default function Planner() {
                             </div>
                             <div className="mt-1.5 flex items-center gap-2 pl-6">
                               <input
-                                className="input !w-28 !py-0.5 text-2xs"
+                                className="input !w-28 !py-0.5 text-sm"
                                 value={t.station}
                                 placeholder="station"
                                 onChange={(e) => patchTask(day.id, t.id, { station: e.target.value })}
@@ -181,13 +183,13 @@ export default function Planner() {
                               <input
                                 type="number"
                                 min={0}
-                                className="input !w-16 !py-0.5 text-2xs"
+                                className="input !w-16 !py-0.5 text-sm"
                                 value={t.durationMins}
                                 onChange={(e) => patchTask(day.id, t.id, { durationMins: Number(e.target.value) })}
                               />
-                              <span className="text-2xs text-ink-400">min</span>
+                              <span className="text-sm text-ink-500">min</span>
                               <input
-                                className="input flex-1 !py-0.5 text-2xs"
+                                className="input flex-1 !py-0.5 text-sm"
                                 value={t.holdNote ?? ''}
                                 placeholder="hold: container, temp, use-by"
                                 onChange={(e) => patchTask(day.id, t.id, { holdNote: e.target.value || undefined })}
@@ -229,7 +231,7 @@ export default function Planner() {
               </SectionTitle>
               <div className="card p-4">
                 {plan.service.length === 0 ? (
-                  <p className="text-sm text-ink-400">
+                  <p className="text-sm text-ink-500">
                     No steps yet. Start from guests seated, give every course a fire time and a landing time.
                   </p>
                 ) : (
@@ -242,7 +244,7 @@ export default function Planner() {
                             type="checkbox"
                             checked={s.done}
                             onChange={() => patchStep(s.id, { done: !s.done })}
-                            className="h-4 w-4 accent-copper-600"
+                            className="h-6 w-6 shrink-0 accent-copper-600"
                           />
                           <input
                             type="time"
@@ -251,13 +253,13 @@ export default function Planner() {
                             onChange={(e) => patchStep(s.id, { time: e.target.value })}
                           />
                           <input
-                            className={`input flex-1 !py-1 ${s.done ? 'line-through text-ink-400' : ''}`}
+                            className={`input flex-1 !py-1 ${s.done ? 'line-through text-ink-500' : ''}`}
                             value={s.action}
                             placeholder="e.g. Fire mains — pan on for fish, plates warming"
                             onChange={(e) => patchStep(s.id, { action: e.target.value })}
                           />
                           <input
-                            className="input !w-28 !py-1 text-2xs"
+                            className="input !w-28 !py-1 text-sm"
                             value={s.station}
                             placeholder="station"
                             onChange={(e) => patchStep(s.id, { station: e.target.value })}

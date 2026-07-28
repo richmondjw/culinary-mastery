@@ -60,7 +60,7 @@ export default function SettingsPage() {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="btn bg-wine-600 text-white hover:bg-wine-500"
+              className="btn bg-wine-500 text-ink-900 hover:bg-wine-600"
               onClick={() => {
                 resetAll()
                 setConfirmReset(false)
@@ -80,8 +80,8 @@ export default function SettingsPage() {
         )}
       </section>
 
-      <p className="mt-6 text-center text-2xs text-ink-400">
-        Culinary Mastery · local-first, no accounts, no servers · currency AUD · GST 10% defaults
+      <p className="mt-6 text-center text-sm text-ink-500">
+        SIZZLE · local-first, no accounts, no servers · currency AUD · GST 10% defaults
       </p>
     </div>
   )

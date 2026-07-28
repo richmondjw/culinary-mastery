@@ -74,14 +74,14 @@ export default function Lists() {
           <SectionTitle
             right={
               data.shopping.some((i) => i.done) && (
-                <button type="button" className="text-xs font-semibold text-wine-600" onClick={() => setShopping(data.shopping.filter((i) => !i.done))}>
+                <button type="button" className="text-sm font-semibold text-wine-600" onClick={() => setShopping(data.shopping.filter((i) => !i.done))}>
                   Clear ticked
                 </button>
               )
             }
           >
             <span className="inline-flex items-center gap-2">
-              <ShoppingBasket size={18} className="text-copper-500" /> Shopping list
+              <ShoppingBasket size={18} className="text-copper-700" /> Shopping list
             </span>
           </SectionTitle>
 
@@ -138,11 +138,11 @@ export default function Lists() {
             </div>
 
             {data.shopping.length === 0 ? (
-              <p className="py-6 text-center text-sm text-ink-400">List is empty — pull in a recipe above.</p>
+              <p className="py-6 text-center text-sm text-ink-500">List is empty — pull in a recipe above.</p>
             ) : (
               Object.entries(grouped).map(([cat, items]) => (
                 <div key={cat}>
-                  <div className="mb-1 mt-2 text-2xs font-semibold uppercase tracking-wider text-ink-400">{cat}</div>
+                  <div className="mb-1 mt-2 text-2xs font-mono font-medium uppercase tracking-[0.14em] text-ink-500">{cat}</div>
                   <ul className="space-y-1">
                     {items.map((i) => (
                       <li key={i.id} className="group flex items-center gap-2">
@@ -151,11 +151,11 @@ export default function Lists() {
                             type="checkbox"
                             checked={i.done}
                             onChange={() => setShopping(data.shopping.map((x) => (x.id === i.id ? { ...x, done: !x.done } : x)))}
-                            className="h-4 w-4 accent-copper-600"
+                            className="h-6 w-6 shrink-0 accent-copper-600"
                           />
-                          <span className={`text-sm ${i.done ? 'text-ink-400 line-through' : 'text-ink-700'}`}>
+                          <span className={`text-sm ${i.done ? 'text-ink-500 line-through' : 'text-ink-700'}`}>
                             {i.label}
-                            {i.detail && <span className="ml-1.5 text-2xs text-ink-400">{i.detail}</span>}
+                            {i.detail && <span className="ml-1.5 text-sm text-ink-500">{i.detail}</span>}
                           </span>
                         </label>
                         <button
@@ -175,15 +175,15 @@ export default function Lists() {
         </section>
 
         <section>
-          <SectionTitle right={<Pill tone="copper">{ownedCount}/{equipmentList.length} owned</Pill>}>
+          <SectionTitle right={<Pill tone="neutral">{ownedCount}/{equipmentList.length} owned</Pill>}>
             <span className="inline-flex items-center gap-2">
-              <Wrench size={18} className="text-copper-500" /> Equipment
+              <Wrench size={18} className="text-copper-700" /> Equipment
             </span>
           </SectionTitle>
           <div className="card p-5">
             {Object.entries(equipmentGroups).map(([cat, items]) => (
               <div key={cat} className="mb-4 last:mb-0">
-                <div className="mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-400">{cat}</div>
+                <div className="mb-1 text-2xs font-mono font-medium uppercase tracking-[0.14em] text-ink-500">{cat}</div>
                 <ul className="space-y-1">
                   {items.map((e) => (
                     <li key={e.id}>
@@ -192,16 +192,16 @@ export default function Lists() {
                           type="checkbox"
                           checked={!!data.equipmentOwned[e.id]}
                           onChange={() => toggleEquipment(e.id)}
-                          className="mt-0.5 h-4 w-4 accent-copper-600"
+                          className="mt-0.5 h-6 w-6 shrink-0 accent-copper-600"
                         />
                         <span className="min-w-0 text-sm text-ink-700">
                           {e.name}
                           {e.essential && (
                             <span className="ml-1.5 align-middle">
-                              <Pill tone="wine">essential</Pill>
+                              <Pill tone="neutral">essential</Pill>
                             </span>
                           )}
-                          <span className="block text-2xs text-ink-400">
+                          <span className="block text-sm text-ink-500">
                             {e.neededFrom}
                             {e.note ? ` · ${e.note}` : ''}
                           </span>

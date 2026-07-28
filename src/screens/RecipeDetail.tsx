@@ -38,7 +38,7 @@ export default function RecipeDetail() {
         </span>
         {m && (
           <Link to={`/modules/${m.id}`}>
-            <Pill tone="copper">Module {m.number}: {m.title}</Pill>
+            <Pill tone="neutral">Module {m.number}: {m.title}</Pill>
           </Link>
         )}
       </div>
@@ -60,11 +60,11 @@ export default function RecipeDetail() {
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-display text-base font-semibold">Ingredients</h2>
             <div className="flex items-center gap-1.5">
-              <button type="button" className="btn-ghost !p-1" onClick={() => setServings(Math.max(1, targetServes - 1))}>
+              <button type="button" className="btn-ghost h-11 w-11 !p-0" onClick={() => setServings(Math.max(1, targetServes - 1))}>
                 <Minus size={14} />
               </button>
-              <span className="w-14 text-center text-xs font-semibold">serves {targetServes}</span>
-              <button type="button" className="btn-ghost !p-1" onClick={() => setServings(targetServes + 1)}>
+              <span className="w-14 text-center text-sm font-semibold">serves {targetServes}</span>
+              <button type="button" className="btn-ghost h-11 w-11 !p-0" onClick={() => setServings(targetServes + 1)}>
                 <Plus size={14} />
               </button>
             </div>
@@ -74,7 +74,7 @@ export default function RecipeDetail() {
               <li key={i} className="flex justify-between gap-2 border-b border-parchment-100 pb-1.5 last:border-0">
                 <span className="text-ink-700">
                   {ing.item}
-                  {ing.prep && <span className="block text-2xs text-ink-400">{ing.prep}</span>}
+                  {ing.prep && <span className="block text-sm text-ink-500">{ing.prep}</span>}
                 </span>
                 <span className="shrink-0 font-semibold text-ink-900">
                   {ing.qty == null ? ing.unit : `${scaleQty(ing.qty, factor)} ${ing.unit}`}
@@ -94,12 +94,12 @@ export default function RecipeDetail() {
                     type="button"
                     onClick={() => setChecked((c) => ({ ...c, [i]: !c[i] }))}
                     className={`flex w-full gap-3 rounded-xl p-2 text-left transition-colors ${
-                      checked[i] ? 'bg-sage-100/60 text-ink-400 line-through' : 'hover:bg-parchment-50'
+                      checked[i] ? 'bg-sage-100/60 text-ink-500 line-through' : 'hover:bg-parchment-50'
                     }`}
                   >
                     <span
-                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-2xs font-bold ${
-                        checked[i] ? 'bg-sage-500 text-white' : 'bg-copper-50 text-copper-700'
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
+                        checked[i] ? 'bg-sage-600 text-ink-900' : 'bg-copper-50 text-copper-700'
                       }`}
                     >
                       {checked[i] ? <Check size={13} /> : i + 1}
@@ -124,18 +124,18 @@ export default function RecipeDetail() {
 
           <section className="card p-5">
             <h3 className="mb-1 flex items-center gap-2 font-display text-base font-semibold">
-              <Repeat size={16} className="text-copper-500" /> What this re-drills
+              <Repeat size={16} className="text-copper-700" /> What this re-drills
             </h3>
             <div className="flex flex-wrap gap-1.5">
               {r.reinforces.map((s) => (
-                <Pill key={s} tone="copper">
+                <Pill key={s} tone="neutral">
                   {s}
                 </Pill>
               ))}
             </div>
           </section>
 
-          <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-parchment-200 bg-white p-4">
+          <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-parchment-200 bg-surface p-4">
             <button type="button" className={cookedAt ? 'btn-secondary' : 'btn-primary'} onClick={() => toggleRecipeCooked(r.id)}>
               <Check size={16} />
               {cookedAt ? `Cooked ${shortDate(cookedAt)} — undo` : 'Mark as cooked'}
@@ -151,7 +151,7 @@ export default function RecipeDetail() {
               <ul className="space-y-2 text-sm text-ink-700">
                 {relatedNotes.map((n) => (
                   <li key={n.id} className="rounded-xl bg-parchment-50 p-3">
-                    <div className="text-2xs text-ink-400">{shortDate(n.date)}</div>
+                    <div className="text-sm text-ink-500">{shortDate(n.date)}</div>
                     {n.text}
                   </li>
                 ))}

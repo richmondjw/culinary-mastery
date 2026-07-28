@@ -47,7 +47,7 @@ export default function Notes() {
       const r = recipeById.get(n.linkId)
       return r ? (
         <Link to={`/recipes/${n.linkId}`}>
-          <Pill tone="copper">recipe: {r.title}</Pill>
+          <Pill tone="neutral">recipe: {r.title}</Pill>
         </Link>
       ) : null
     }
@@ -55,7 +55,7 @@ export default function Notes() {
       const found = lessonById(n.linkId)
       return found ? (
         <Link to={`/modules/${found.module.id}/lessons/${n.linkId}`}>
-          <Pill tone="sage">lesson: {found.lesson.title}</Pill>
+          <Pill tone="pass">lesson: {found.lesson.title}</Pill>
         </Link>
       ) : null
     }
@@ -133,11 +133,11 @@ export default function Notes() {
                     <h3 className="font-display text-base font-semibold">{n.title}</h3>
                     {linkLabel(n)}
                   </div>
-                  <div className="text-2xs text-ink-400">{shortDate(n.date)}</div>
+                  <div className="text-sm text-ink-500">{shortDate(n.date)}</div>
                 </div>
                 <button
                   type="button"
-                  className="btn-ghost !p-1.5 text-ink-400 hover:text-wine-600"
+                  className="btn-ghost h-11 w-11 !p-0 text-ink-500 hover:text-wine-600"
                   title="Delete note"
                   onClick={async () => {
                     for (const pid of n.photoIds) {

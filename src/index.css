@@ -2,66 +2,298 @@
 @tailwind components;
 @tailwind utilities;
 
+/* SIZZLE — risograph comic.
+   Ink outlines everything. Shadows are hard and offset, never blurred.
+   No state is ever signalled by colour alone. */
+
 @layer base {
   html {
     @apply antialiased;
   }
-  /* Manga paper: warm white with a faint halftone screentone. */
   body {
-    @apply bg-parchment-50 text-ink-900 font-sans;
-    background-image: radial-gradient(rgba(15, 14, 13, 0.055) 1px, transparent 1.3px);
+    @apply bg-parchment-50 text-ink-900 font-sans text-base;
+    background-image: radial-gradient(rgba(15, 14, 13, 0.055) 1.1px, transparent 1.2px);
     background-size: 13px 13px;
+  }
+  /* Quiet mode lives on a screen's own wrapper, but the halftone is painted on
+     <body> — so the wrapper alone can't suppress it. Kill it at the source when
+     a quiet screen is mounted, which is the point of the mode: no screentone
+     behind columns of numerals. */
+  body:has(.quiet) {
+    background-image: none;
   }
   ::selection {
     @apply bg-star-400 text-ink-900;
   }
   .font-display {
-    letter-spacing: 0.035em;
+    letter-spacing: 0.01em;
+  }
+  /* Flame/teal/fluoro can never be small text. Links use the deep variants. */
+  a {
+    @apply text-copper-700;
+  }
+  a:hover {
+    @apply text-ink-900;
+  }
+  /* Tabular numerals everywhere numbers are compared. */
+  .font-mono,
+  table,
+  input[type='number'] {
+    font-variant-numeric: tabular-nums;
   }
 }
 
 @layer components {
-  /* Comic panel: thick ink outline + hard offset shadow. */
+  /* ---- Panels ---------------------------------------------------------- */
   .card {
-    @apply bg-white rounded-2xl border-2 border-ink-900 shadow-card;
+    @apply bg-surface rounded-2xl border-[3px] border-ink-900 shadow-card;
   }
+  .card-flat {
+    @apply bg-surface rounded-2xl border-[3px] border-ink-900;
+  }
+  .panel {
+    @apply bg-surface rounded-3xl border-[3px] border-ink-900 shadow-lift;
+  }
+
+  /* ---- Buttons -------------------------------------------------------- */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-ink-900 px-4 py-2 text-sm font-bold shadow-press transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-press disabled:active:translate-x-0 disabled:active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border-[3px] border-ink-900
+           px-6 text-lg font-bold min-h-cta shadow-press transition-all duration-75
+           active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
+           disabled:cursor-not-allowed disabled:bg-parchment-100 disabled:border-ink-300
+           disabled:text-ink-locked disabled:shadow-none
+           disabled:active:translate-x-0 disabled:active:translate-y-0;
   }
+  /* ink text on flame - white on flame is 3.2:1 and fails AA */
   .btn-primary {
-    @apply btn bg-copper-600 text-white hover:bg-copper-500;
+    @apply btn bg-copper-600 text-ink-900 hover:bg-copper-500;
+  }
+  .btn-hero {
+    @apply btn bg-copper-600 text-ink-900 hover:bg-copper-500
+           font-display text-[22px] px-8 min-h-hero shadow-lift
+           active:translate-x-[7px] active:translate-y-[7px];
   }
   .btn-secondary {
-    @apply btn bg-white text-ink-900 hover:bg-star-400/30;
+    @apply btn bg-surface text-ink-900 hover:bg-star-400;
+  }
+  .btn-confirm {
+    @apply btn bg-sage-600 text-ink-900 hover:bg-sage-500;
+  }
+  /* Destructive gets a confirm step, not a colour: red already means "cook this". */
+  .btn-retake {
+    @apply btn bg-transparent text-ink-900 border-dashed hover:bg-parchment-50 hover:border-solid shadow-none;
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-transparent px-3 py-1.5 text-sm font-bold text-ink-500 transition-colors hover:text-copper-600 hover:bg-copper-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 min-h-tap
+           text-[17px] font-bold text-ink-500 transition-colors
+           hover:text-ink-900 hover:bg-parchment-50;
   }
+  .btn-icon {
+    @apply inline-flex items-center justify-center h-[52px] w-[52px] rounded-full
+           border-[3px] border-ink-900 bg-star-400 text-ink-900 text-xl shadow-press
+           transition-all duration-75 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  }
+
+  /* ---- Fields --------------------------------------------------------- */
   .input {
-    @apply w-full rounded-xl border-2 border-ink-900 bg-white px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2 focus:ring-star-400 focus:ring-offset-1;
+    @apply w-full box-border rounded-xl border-[3px] border-ink-900 bg-surface px-4 min-h-cta
+           text-lg text-ink-900 placeholder:text-ink-500
+           focus:outline-none focus:shadow-focus;
   }
   .label {
-    @apply block text-2xs font-bold uppercase tracking-wider text-ink-500 mb-1;
+    @apply block font-mono text-2xs uppercase tracking-[0.1em] text-ink-500 mb-2;
   }
+  .affix {
+    @apply flex items-stretch overflow-hidden rounded-xl border-[3px] border-ink-900 bg-surface;
+  }
+  .affix > span {
+    @apply inline-flex items-center px-4 bg-parchment-50 border-r-[3px] border-ink-900 font-mono text-[17px];
+  }
+  .affix > input {
+    @apply w-full box-border border-0 bg-transparent px-4 min-h-cta font-mono text-lg
+           focus:outline-none focus:bg-[#FFFBEF];
+  }
+
+  /* Checkbox row: 48px target, tick + strike-through, never colour alone. */
+  .check-row {
+    @apply flex items-center gap-3 min-h-tap cursor-pointer text-lg;
+  }
+  .check-box {
+    @apply inline-flex shrink-0 items-center justify-center h-[30px] w-[30px]
+           rounded-lg border-[3px] border-ink-900 bg-surface text-[17px];
+  }
+  .check-box-on {
+    @apply check-box bg-sage-600;
+  }
+  .check-row-done {
+    @apply line-through text-ink-500;
+  }
+
+  /* Rubric 1-5: selected carries an inset ring as well as a fill. */
+  .score-cell {
+    @apply flex-1 inline-flex items-center justify-center h-[52px] rounded-[10px]
+           border-[3px] border-ink-900 bg-surface font-mono text-[17px] cursor-pointer;
+  }
+  .score-cell-on {
+    @apply score-cell bg-star-400 shadow-[inset_0_0_0_3px_#FFFDF8];
+  }
+
+  /* Toggle: always label it "On"/"Off" beside the control. */
+  .toggle {
+    @apply inline-flex box-border items-center w-[78px] h-[44px] p-[3px]
+           rounded-full border-[3px] border-ink-900 cursor-pointer;
+  }
+  .toggle-off { @apply toggle bg-parchment-200 justify-start; }
+  .toggle-on  { @apply toggle bg-sage-600 justify-end; }
+  .toggle-knob {
+    @apply block h-8 w-8 rounded-full border-[3px] border-ink-900 bg-surface;
+  }
+
+  /* ---- Pills & badges ------------------------------------------------- */
   .pill {
-    @apply inline-flex items-center gap-1 rounded-full border border-ink-900 px-2.5 py-0.5 text-2xs font-bold;
+    @apply inline-flex items-center gap-1.5 rounded-full border-2 border-ink-900
+           px-3.5 py-1.5 text-[15px] font-bold text-ink-900;
   }
-  /* Speech-bubble variant for callouts. */
+  .pill-pass    { @apply pill bg-sage-600; }
+  .pill-best    { @apply pill bg-star-400; }
+  .pill-retake  { @apply pill bg-wine-500; }
+  .pill-streak  { @apply pill bg-copper-600; }
+  .pill-locked  { @apply pill bg-parchment-100 border-ink-300 text-ink-locked; }
+  .pill-meta    { @apply pill bg-surface font-mono text-sm font-normal; }
+
+  /* Track identity: colour AND shape, so it survives greyscale. */
+  .track-badge {
+    @apply inline-flex shrink-0 items-center justify-center h-9 w-9 border-[3px] border-ink-900;
+  }
+  .track-cook     { @apply track-badge bg-copper-600 rounded-full; }
+  .track-craft    { @apply track-badge bg-wine-500 rounded-md; }
+  .track-business { @apply track-badge bg-sage-600 rounded-md rotate-45; }
+  .track-business > * { @apply -rotate-45; }
+
+  /* ---- Progress ------------------------------------------------------- */
+  .meter {
+    @apply h-[22px] overflow-hidden rounded-full border-[3px] border-ink-900 bg-parchment-200;
+  }
+  .meter-fill {
+    @apply h-full;
+    background-image: repeating-linear-gradient(135deg, #ff4b12 0 8px, #ff6b36 8px 16px);
+  }
+  .meter-fill-done {
+    @apply h-full bg-sage-600 flex items-center justify-center text-[13px] font-bold text-ink-900;
+  }
+  .meter-caption {
+    @apply flex justify-between font-mono text-sm text-ink-900;
+  }
+
+  .node {
+    @apply inline-flex items-center justify-center h-[34px] w-[34px] rounded-full
+           border-[3px] border-ink-900 font-mono text-sm;
+  }
+  .node-done    { @apply node bg-sage-600 text-ink-900; }
+  .node-current { @apply node bg-copper-600 text-ink-900; }
+  .node-todo    { @apply node bg-parchment-100 border-ink-300 text-ink-locked; }
+
+  /* ---- Rows & callouts ------------------------------------------------ */
+  .row {
+    @apply flex items-center gap-3 min-h-[60px] rounded-2xl border-[3px] border-ink-900
+           bg-surface px-4 shadow-press cursor-pointer hover:bg-parchment-50;
+  }
+  .row-current { @apply row bg-star-400 hover:bg-star-400; }
+  .row-locked {
+    @apply flex items-center gap-3 min-h-[60px] rounded-2xl border-[3px] border-ink-300
+           bg-[#F7F2E4] px-4 text-ink-locked cursor-not-allowed;
+  }
+
   .bubble {
-    @apply relative bg-white rounded-2xl border-2 border-ink-900;
+    @apply relative rounded-2xl border-[3px] border-ink-900 bg-star-400 px-5 pt-4 pb-5;
   }
   .bubble::after {
     content: '';
-    @apply absolute -bottom-[10px] left-8 h-4 w-4 rotate-45 border-b-2 border-r-2 border-ink-900 bg-white;
+    @apply absolute -bottom-[11px] left-[30px] h-4 w-4 rotate-45
+           border-b-[3px] border-r-[3px] border-ink-900 bg-star-400;
+  }
+
+  /* ---- Media ---------------------------------------------------------- */
+  .photo-slot {
+    background-image: repeating-linear-gradient(135deg, #ffe3d4 0 9px, #fff6e8 9px 18px);
+    @apply flex items-end p-3 border-b-[3px] border-ink-900;
+  }
+  .photo-slot > span {
+    @apply rounded bg-ink-900 px-2 py-1 font-mono text-2xs text-parchment-50;
+  }
+}
+
+/* ---- Quiet mode -------------------------------------------------------
+   Costing, Menu Designer, Planner. Halftone + 3px outlines are unreadable
+   behind dense numerals, so the brand has a documented second gear:
+   no texture, 2px rules, no offset shadows, one accent per table. */
+@layer components {
+  .quiet {
+    background-image: none;
+  }
+  .quiet .card,
+  .quiet .card-flat,
+  .quiet .panel {
+    @apply rounded-xl border-2 shadow-none;
+  }
+  .quiet .btn,
+  .quiet .btn-primary,
+  .quiet .btn-secondary,
+  .quiet .btn-confirm {
+    @apply border-2 shadow-none rounded-[10px]
+           active:translate-x-0 active:translate-y-0;
+  }
+  .quiet .input,
+  .quiet .affix {
+    @apply border-2 rounded-[10px];
+  }
+  .quiet .row { @apply border-2 shadow-none; }
+  /* Editable data grids: .input's 18px type and 16px side padding eat the whole
+     cell at these column widths, clipping the value. Tighten inside table cells
+     only — still a 44px target, still above the 14px meta floor. */
+  .quiet td .input {
+    @apply px-2 text-[17px] min-h-[44px];
+  }
+  /* An editable grid carries a control in every cell, so the readout table's
+     16px cell padding pushes the computed columns off-screen. Halve it. */
+  .quiet table.grid-dense thead th,
+  .quiet table.grid-dense tbody td,
+  .quiet table.grid-dense tfoot td {
+    @apply px-2;
+  }
+
+  .quiet table { @apply w-full border-collapse; }
+  .quiet thead th {
+    @apply bg-ink-900 px-4 py-3 text-left font-mono text-2xs uppercase
+           tracking-[0.08em] text-parchment-50;
+  }
+  .quiet thead th:not(:first-child) { @apply text-right; }
+  .quiet tbody td {
+    @apply border-b border-parchment-200 px-4 py-3 text-[17px];
+  }
+  .quiet tbody td:not(:first-child) { @apply text-right font-mono; }
+  .quiet tbody tr:nth-child(even) { @apply bg-[#FFFBEF]; }
+  .quiet tfoot td {
+    @apply border-t-2 border-ink-900 bg-parchment-50 px-4 py-3 font-mono text-[17px] font-medium;
+  }
+  .quiet tfoot td:first-child { @apply font-display text-[15px] font-normal; }
+  .quiet tfoot .total { @apply text-copper-700; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
 
 @media print {
-  .no-print {
-    display: none !important;
-  }
+  .no-print { display: none !important; }
   body {
     background: white;
     background-image: none;
   }
+  .card, .card-flat, .panel { box-shadow: none; }
 }

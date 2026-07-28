@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Plus, ScrollText, Trash2 } from 'lucide-react'
 import { PageHeader } from '../components/Layout'
-import { EmptyState, Field, Pill, SectionTitle, StatCard } from '../components/ui'
+import { EmptyState, Field, SectionTitle, StatCard } from '../components/ui'
 import { analyseMenu, classifyDish, portionCost, type MenuMixClass } from '../lib/costing'
 import { money, pct } from '../lib/format'
 import { uid } from '../lib/id'
@@ -9,11 +9,14 @@ import { useUserStore } from '../store/useUserStore'
 import { recipes } from '../data'
 import type { MenuCourse, MenuDish, MenuPlan } from '../types/state'
 
-const MIX_META: Record<MenuMixClass, { label: string; tone: 'sage' | 'copper' | 'gold' | 'wine'; advice: string }> = {
-  star: { label: 'Star', tone: 'sage', advice: 'High profit, high popularity — protect it, feature it.' },
-  plowhorse: { label: 'Plowhorse', tone: 'copper', advice: 'Popular but low profit — nudge price up or trim cost.' },
-  puzzle: { label: 'Puzzle', tone: 'gold', advice: 'Profitable but unloved — rename, reposition, or let servers sell it.' },
-  dog: { label: 'Dog', tone: 'wine', advice: 'Low profit, low popularity — replace it.' },
+// SIZZLE quiet mode: this is a dense data table, so the menu-mix classification is carried by
+// glyph + label rather than four competing brand fills. Each glyph is distinct in greyscale,
+// which four coloured pills would not be.
+const MIX_META: Record<MenuMixClass, { label: string; glyph: string; advice: string }> = {
+  star: { label: 'Star', glyph: '★', advice: 'High profit, high popularity — protect it, feature it.' },
+  plowhorse: { label: 'Plowhorse', glyph: '▲', advice: 'Popular but low profit — nudge price up or trim cost.' },
+  puzzle: { label: 'Puzzle', glyph: '◆', advice: 'Profitable but unloved — rename, reposition, or let servers sell it.' },
+  dog: { label: 'Dog', glyph: '○', advice: 'Low profit, low popularity — replace it.' },
 }
 
 function newMenu(): MenuPlan {
@@ -75,7 +78,9 @@ export default function MenuDesigner() {
   const analysis = menu ? analyseMenu(menu, costOf) : null
 
   return (
-    <div>
+    // SIZZLE quiet mode: dense numeric screen — no halftone, no offset shadows,
+    // and .quiet styles the semantic table directly.
+    <div className="quiet">
       <PageHeader
         title="Menu designer"
         subtitle="Build the menu, link each dish to its costing sheet, and watch blended GP and the menu-mix matrix update live."
@@ -103,7 +108,7 @@ export default function MenuDesigner() {
                 }`}
               >
                 <div className="truncate">{m.name}</div>
-                <div className="text-2xs font-normal text-ink-400">
+                <div className="text-sm font-normal text-ink-500">
                   {m.courses.reduce((s, c) => s + c.dishes.length, 0)} dishes
                 </div>
               </button>
@@ -162,20 +167,20 @@ export default function MenuDesigner() {
                     </button>
                   </div>
                   {course.dishes.length === 0 ? (
-                    <p className="text-sm text-ink-400">No dishes yet.</p>
+                    <p className="text-sm text-ink-500">No dishes yet.</p>
                   ) : (
                     <div className="overflow-x-auto">
-                      <table className="w-full min-w-[720px] text-sm">
+                      <table className="grid-dense min-w-[900px]">
                         <thead>
-                          <tr className="text-left text-2xs uppercase tracking-wider text-ink-400">
-                            <th className="pb-2 pr-2">Dish</th>
-                            <th className="pb-2 pr-2">From recipe</th>
-                            <th className="pb-2 pr-2">Costing</th>
-                            <th className="pb-2 pr-2">Price inc. GST</th>
-                            <th className="pb-2 pr-2">Forecast sold</th>
-                            <th className="pb-2 pr-2 text-right">GP$</th>
-                            <th className="pb-2 pr-2">Mix</th>
-                            <th className="pb-2" />
+                          <tr>
+                            <th>Dish</th>
+                            <th>From recipe</th>
+                            <th>Costing</th>
+                            <th>Price inc. GST</th>
+                            <th>Forecast sold</th>
+                            <th>GP$</th>
+                            <th>Mix</th>
+                            <th><span className="sr-only">Remove</span></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -183,8 +188,8 @@ export default function MenuDesigner() {
                             const eco = analysis.dishes.find((d) => d.dishId === dish.id)
                             const cls = eco ? classifyDish(eco, analysis) : null
                             return (
-                              <tr key={dish.id} className="border-t border-parchment-100">
-                                <td className="py-1.5 pr-2">
+                              <tr key={dish.id}>
+                                <td>
                                   <input
                                     className="input !py-1"
                                     value={dish.name}
@@ -192,9 +197,9 @@ export default function MenuDesigner() {
                                     onChange={(e) => patchDish(course.id, dish.id, { name: e.target.value })}
                                   />
                                 </td>
-                                <td className="py-1.5 pr-2">
+                                <td>
                                   <select
-                                    className="input !w-36 !py-1"
+                                    className="input !w-44 !py-1"
                                     value={dish.recipeId ?? ''}
                                     onChange={(e) => {
                                       const r = recipes.find((x) => x.id === e.target.value)
@@ -212,9 +217,9 @@ export default function MenuDesigner() {
                                     ))}
                                   </select>
                                 </td>
-                                <td className="py-1.5 pr-2">
+                                <td>
                                   <select
-                                    className="input !w-32 !py-1"
+                                    className="input !w-40 !py-1"
                                     value={dish.costingSheetId ?? ''}
                                     onChange={(e) => patchDish(course.id, dish.id, { costingSheetId: e.target.value || undefined })}
                                   >
@@ -230,7 +235,7 @@ export default function MenuDesigner() {
                                       type="number"
                                       min={0}
                                       step={0.1}
-                                      className="input mt-1 !w-32 !py-1"
+                                      className="input mt-1 !w-40 !py-1"
                                       placeholder="portion cost $"
                                       value={dish.manualCost ?? ''}
                                       onChange={(e) =>
@@ -239,34 +244,38 @@ export default function MenuDesigner() {
                                     />
                                   )}
                                 </td>
-                                <td className="py-1.5 pr-2">
+                                <td>
                                   <input
                                     type="number"
                                     min={0}
                                     step={0.5}
-                                    className="input !w-24 !py-1"
+                                    className="input !w-28 !py-1"
                                     value={dish.sellPrice}
                                     onChange={(e) => patchDish(course.id, dish.id, { sellPrice: Number(e.target.value) })}
                                   />
                                 </td>
-                                <td className="py-1.5 pr-2">
+                                <td>
                                   <input
                                     type="number"
                                     min={0}
-                                    className="input !w-20 !py-1"
+                                    className="input !w-24 !py-1"
                                     value={dish.forecastSold}
                                     onChange={(e) => patchDish(course.id, dish.id, { forecastSold: Number(e.target.value) })}
                                   />
                                 </td>
-                                <td className="py-1.5 pr-2 text-right font-semibold">{eco ? money(eco.gpDollars) : '—'}</td>
-                                <td className="py-1.5 pr-2">
+                                <td className="font-semibold">{eco ? money(eco.gpDollars) : '—'}</td>
+                                <td>
                                   {cls && (
-                                    <span title={MIX_META[cls].advice}>
-                                      <Pill tone={MIX_META[cls].tone}>{MIX_META[cls].label}</Pill>
+                                    <span
+                                      className="inline-flex items-center gap-1.5 whitespace-nowrap font-mono text-sm text-ink-900"
+                                      title={MIX_META[cls].advice}
+                                    >
+                                      <span aria-hidden="true">{MIX_META[cls].glyph}</span>
+                                      {MIX_META[cls].label}
                                     </span>
                                   )}
                                 </td>
-                                <td className="py-1.5 text-right">
+                                <td>
                                   <button
                                     type="button"
                                     className="text-ink-300 hover:text-wine-600"
@@ -279,6 +288,20 @@ export default function MenuDesigner() {
                             )
                           })}
                         </tbody>
+                        <tfoot>
+                          <tr>
+                            <td colSpan={5}>{course.name} — forecast gross profit</td>
+                            <td className="total">
+                              {money(
+                                course.dishes.reduce(
+                                  (sum, d) => sum + (analysis.dishes.find((x) => x.dishId === d.id)?.gpDollars ?? 0),
+                                  0,
+                                ),
+                              )}
+                            </td>
+                            <td colSpan={2} />
+                          </tr>
+                        </tfoot>
                       </table>
                     </div>
                   )}

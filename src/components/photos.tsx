@@ -84,7 +84,7 @@ export function PhotoStrip({ ids, onRemove }: { ids: string[]; onRemove?: (id: s
           {onRemove && (
             <button
               type="button"
-              className="absolute -right-1.5 -top-1.5 hidden rounded-full bg-wine-600 p-1 text-white group-hover:block"
+              className="absolute -right-1.5 -top-1.5 hidden rounded-full bg-wine-500 p-1 text-ink-900 group-hover:block"
               onClick={async () => {
                 await deletePhoto(id)
                 deletePhotoMeta(id)

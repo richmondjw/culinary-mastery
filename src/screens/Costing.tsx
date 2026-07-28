@@ -52,7 +52,9 @@ export default function Costing() {
   }
 
   return (
-    <div>
+    // SIZZLE quiet mode: dense numeric screen — no halftone, no offset shadows,
+    // and .quiet styles the semantic table directly.
+    <div className="quiet">
       <PageHeader
         title="Costing & margins"
         subtitle="From supplier pack price to yield-adjusted portion cost, food-cost % and gross profit. GST-aware (prices entered inc. tax)."
@@ -80,7 +82,7 @@ export default function Costing() {
                 }`}
               >
                 <div className="truncate">{s.name}</div>
-                <div className="text-2xs font-normal text-ink-400">
+                <div className="text-sm font-normal text-ink-500">
                   {money(portionCost(s))} / portion · GP {pct(grossProfitPct(s))}
                 </div>
               </button>
@@ -115,22 +117,22 @@ export default function Costing() {
               </div>
 
               <div className="card overflow-x-auto p-5">
-                <table className="w-full min-w-[640px] text-sm">
+                <table className="grid-dense min-w-[800px]">
                   <thead>
-                    <tr className="text-left text-2xs uppercase tracking-wider text-ink-400">
-                      <th className="pb-2 pr-2">Ingredient</th>
-                      <th className="pb-2 pr-2">Pack price</th>
-                      <th className="pb-2 pr-2">Pack size</th>
-                      <th className="pb-2 pr-2">Used (AP)</th>
-                      <th className="pb-2 pr-2" title="Edible-portion yield">Yield %</th>
-                      <th className="pb-2 pr-2 text-right">EP cost</th>
-                      <th className="pb-2" />
+                    <tr>
+                      <th>Ingredient</th>
+                      <th>Pack price</th>
+                      <th>Pack size</th>
+                      <th>Used (AP)</th>
+                      <th title="Edible-portion yield">Yield %</th>
+                      <th>EP cost</th>
+                      <th><span className="sr-only">Remove</span></th>
                     </tr>
                   </thead>
                   <tbody>
                     {sheet.lines.map((line) => (
-                      <tr key={line.id} className="border-t border-parchment-100">
-                        <td className="py-1.5 pr-2">
+                      <tr key={line.id}>
+                        <td>
                           <input
                             className="input !py-1"
                             value={line.ingredient}
@@ -140,14 +142,14 @@ export default function Costing() {
                             }
                           />
                         </td>
-                        <td className="py-1.5 pr-2">
-                          <div className="flex items-center gap-1">
-                            <span className="text-ink-400">$</span>
+                        <td>
+                          <div className="flex items-center justify-end gap-1">
+                            <span className="text-ink-500">$</span>
                             <input
                               type="number"
                               min={0}
                               step={0.01}
-                              className="input !w-20 !py-1"
+                              className="input !w-24 !py-1"
                               value={line.packPrice}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, packPrice: Number(e.target.value) } : l)) })
@@ -155,20 +157,20 @@ export default function Costing() {
                             />
                           </div>
                         </td>
-                        <td className="py-1.5 pr-2">
-                          <div className="flex items-center gap-1">
+                        <td>
+                          <div className="flex items-center justify-end gap-1">
                             <input
                               type="number"
                               min={0}
                               step={0.01}
-                              className="input !w-16 !py-1"
+                              className="input !w-20 !py-1"
                               value={line.packQty}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, packQty: Number(e.target.value) } : l)) })
                               }
                             />
                             <select
-                              className="input !w-16 !px-1 !py-1"
+                              className="input !w-[68px] !px-1 !py-1"
                               value={line.packUnit}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, packUnit: e.target.value as Unit } : l)) })
@@ -180,20 +182,20 @@ export default function Costing() {
                             </select>
                           </div>
                         </td>
-                        <td className="py-1.5 pr-2">
-                          <div className="flex items-center gap-1">
+                        <td>
+                          <div className="flex items-center justify-end gap-1">
                             <input
                               type="number"
                               min={0}
                               step={0.01}
-                              className="input !w-16 !py-1"
+                              className="input !w-20 !py-1"
                               value={line.usedQty}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, usedQty: Number(e.target.value) } : l)) })
                               }
                             />
                             <select
-                              className="input !w-16 !px-1 !py-1"
+                              className="input !w-[68px] !px-1 !py-1"
                               value={line.usedUnit}
                               onChange={(e) =>
                                 patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, usedUnit: e.target.value as Unit } : l)) })
@@ -205,20 +207,20 @@ export default function Costing() {
                             </select>
                           </div>
                         </td>
-                        <td className="py-1.5 pr-2">
+                        <td>
                           <input
                             type="number"
                             min={1}
                             max={100}
-                            className="input !w-16 !py-1"
+                            className="input !w-20 !py-1"
                             value={line.yieldPct}
                             onChange={(e) =>
                               patch({ lines: sheet.lines.map((l) => (l.id === line.id ? { ...l, yieldPct: Number(e.target.value) } : l)) })
                             }
                           />
                         </td>
-                        <td className="py-1.5 pr-2 text-right font-semibold">{money(lineCost(line))}</td>
-                        <td className="py-1.5 text-right">
+                        <td className="font-semibold">{money(lineCost(line))}</td>
+                        <td>
                           <button
                             type="button"
                             className="text-ink-300 hover:text-wine-600"
@@ -230,6 +232,13 @@ export default function Costing() {
                       </tr>
                     ))}
                   </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colSpan={5}>Total ingredients (before {sheet.qFactorPct}% Q-factor)</td>
+                      <td className="total">{money(sheetIngredientCost(sheet))}</td>
+                      <td />
+                    </tr>
+                  </tfoot>
                 </table>
                 <button
                   type="button"
@@ -286,7 +295,7 @@ export default function Costing() {
                   <div className="mt-3 flex gap-6 text-sm">
                     <div>
                       <div className="label">Food cost</div>
-                      <div className={`font-display text-xl font-semibold ${(foodCostPct(sheet) ?? 0) > 35 ? 'text-wine-600' : 'text-sage-600'}`}>
+                      <div className={`font-display text-xl font-semibold ${(foodCostPct(sheet) ?? 0) > 35 ? 'text-wine-600' : 'text-sage-700'}`}>
                         {pct(foodCostPct(sheet))}
                       </div>
                     </div>
@@ -305,7 +314,7 @@ export default function Costing() {
                       max={45}
                       value={targetFc}
                       onChange={(e) => setTargetFc(Number(e.target.value))}
-                      className="w-full accent-copper-600"
+                      className="h-11 w-full accent-copper-600"
                     />
                   </Field>
                   <p className="mt-2 text-sm text-ink-500">

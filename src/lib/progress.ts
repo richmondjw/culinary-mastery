@@ -85,3 +85,14 @@ export function totalLessons(): number {
 export function totalRecipes(): number {
   return recipes.length
 }
+
+/**
+ * SIZZLE track mapping. The brand splits the curriculum into three visual tracks;
+ * the course is organised in four stages, so the two foundation stages share the
+ * Cook track. Kept here so every screen badges a stage the same way.
+ */
+export function trackForStage(stageId: number): 'cook' | 'craft' | 'business' {
+  if (stageId <= 2) return 'cook'
+  if (stageId === 3) return 'craft'
+  return 'business'
+}

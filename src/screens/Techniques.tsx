@@ -33,7 +33,7 @@ export default function Techniques() {
 
       <div className="mb-5 flex flex-wrap items-center gap-3">
         <div className="relative w-full sm:w-64">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-500" />
           <input className="input pl-9" placeholder="Search techniques…" value={q} onChange={(e) => setQ(e.target.value)} />
         </div>
         <select className="input w-full sm:w-56" value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -66,7 +66,7 @@ export default function Techniques() {
                 <Pill tone="neutral">{t.category}</Pill>
               </div>
               <p className="text-sm text-ink-500">{t.summary}</p>
-              <ul className="mt-2 list-inside list-disc space-y-1 text-xs text-ink-700">
+              <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-ink-700">
                 {t.keyPoints.map((k, i) => (
                   <li key={i}>{k}</li>
                 ))}
@@ -77,12 +77,12 @@ export default function Techniques() {
                   {isOpen ? (
                     <>
                       <VideoPanel videos={clips} compact />
-                      <button type="button" className="btn-ghost mt-1 !text-2xs" onClick={() => setOpenVideo(null)}>
+                      <button type="button" className="btn-ghost mt-1 !text-sm" onClick={() => setOpenVideo(null)}>
                         Hide video
                       </button>
                     </>
                   ) : (
-                    <button type="button" className="btn-secondary !py-1.5 text-xs" onClick={() => setOpenVideo(t.id)}>
+                    <button type="button" className="btn-secondary !py-1.5 text-sm" onClick={() => setOpenVideo(t.id)}>
                       <Video size={14} /> Watch{clips.length > 1 ? ` (${clips.length})` : ''}
                     </button>
                   )}
@@ -90,11 +90,11 @@ export default function Techniques() {
               )}
               {usedIn.length > 0 && (
                 <div className="mt-3 border-t border-parchment-100 pt-2">
-                  <div className="mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-400">Practised in</div>
+                  <div className="mb-1 text-2xs font-mono font-medium uppercase tracking-[0.14em] text-ink-500">Practised in</div>
                   <div className="flex flex-wrap gap-1.5">
                     {usedIn.slice(0, 4).map((r) => (
                       <Link key={r.id} to={`/recipes/${r.id}`}>
-                        <Pill tone="copper">{r.title}</Pill>
+                        <Pill tone="neutral">{r.title}</Pill>
                       </Link>
                     ))}
                     {usedIn.length > 4 && <Pill tone="neutral">+{usedIn.length - 4} more</Pill>}

@@ -37,7 +37,6 @@ const nav = [
   { to: '/portfolio', label: 'Portfolio', icon: Camera },
 ]
 
-/** Evaluates achievement conditions after every state change. */
 function useAchievementWatcher() {
   const store = useUserStore()
   useEffect(() => {
@@ -46,15 +45,32 @@ function useAchievementWatcher() {
   })
 }
 
+/** Three rising bars — heat climbing, and the three tracks.
+ *  Pure DOM, so there is no logo asset to ship. */
+function Mark({ size = 40 }: { size?: number }) {
+  const unit = size / 40
+  return (
+    <span
+      className="inline-flex shrink-0 items-end gap-[4px] rounded-xl border-[3px] border-ink-900 bg-copper-600"
+      style={{ width: size, height: size, padding: 7 * unit }}
+      aria-hidden="true"
+    >
+      <span className="block flex-1 rounded-full border-2 border-ink-900 bg-star-400" style={{ height: 9 * unit }} />
+      <span className="block flex-1 rounded-sm border-2 border-ink-900 bg-sage-600" style={{ height: 16 * unit }} />
+      <span className="block flex-1 rounded-t-sm border-2 border-ink-900 bg-wine-500" style={{ height: 23 * unit }} />
+    </span>
+  )
+}
+
 function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex min-w-0 items-center gap-3">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-2 border-ink-900 bg-copper-600 text-white shadow-press">
-        <ChefHat size={22} />
-      </div>
+      <Mark size={40} />
       <div className="min-w-0">
-        <div className="truncate font-display text-xl leading-tight text-ink-900">Culinary Mastery</div>
-        {!compact && <div className="truncate text-2xs font-bold text-ink-400">🍳 Fundamentals → profitable menu</div>}
+        <div className="truncate font-display text-xl leading-tight text-ink-900">SIZZLE</div>
+        {!compact && (
+          <div className="truncate font-mono text-2xs uppercase tracking-[0.14em] text-ink-500">Cook louder</div>
+        )}
       </div>
     </div>
   )
@@ -62,7 +78,7 @@ function Logo({ compact = false }: { compact?: boolean }) {
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <nav className="flex-1 space-y-0.5 overflow-y-auto px-3 py-2">
+    <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-3">
       {nav.map(({ to, label, icon: Icon, end }) => (
         <NavLink
           key={to}
@@ -70,14 +86,14 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           end={end}
           onClick={onNavigate}
           className={({ isActive }) =>
-            `flex items-center gap-3 rounded-xl border-2 px-3 py-1.5 text-sm font-bold transition-all ${
+            `flex min-h-[44px] items-center gap-3 rounded-xl px-3 text-[15px] font-bold ${
               isActive
-                ? 'border-ink-900 bg-star-400/40 text-ink-900 shadow-press'
-                : 'border-transparent text-ink-500 hover:bg-parchment-100 hover:text-ink-900'
+                ? 'border-[3px] border-ink-900 bg-star-400 text-ink-900 shadow-press'
+                : 'border-[3px] border-transparent text-ink-500 hover:bg-parchment-100 hover:text-ink-900'
             }`
           }
         >
-          <Icon size={17} />
+          <Icon size={18} />
           {label}
         </NavLink>
       ))}
@@ -90,11 +106,13 @@ function ChefXp({ pct }: { pct: number }) {
     <div className="flex items-center gap-3">
       <ProgressRing pct={pct} size={48} stroke={5} />
       <div className="min-w-0 flex-1">
-        <div className="text-xs font-bold">Chef XP</div>
-        <div className="text-2xs font-bold text-ink-400">{pct >= 100 ? '👑 Head Chef!' : '⭐ Keep cooking!'}</div>
+        <div className="font-display text-[15px]">Chef XP</div>
+        <div className="font-mono text-2xs uppercase text-ink-500">
+          {pct >= 100 ? 'HEAD CHEF' : 'KEEP COOKING'}
+        </div>
       </div>
-      <NavLink to="/settings" className="text-ink-400 hover:text-copper-600" title="Settings">
-        <Settings size={17} />
+      <NavLink to="/settings" className="-m-2 flex h-11 w-11 items-center justify-center text-ink-500 hover:text-copper-700" title="Settings">
+        <Settings size={18} />
       </NavLink>
     </div>
   )
@@ -107,7 +125,6 @@ export default function Layout() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const location = useLocation()
 
-  // Close the drawer on navigation and on Escape.
   useEffect(() => setDrawerOpen(false), [location.pathname])
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setDrawerOpen(false)
@@ -117,34 +134,31 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Desktop sidebar */}
-      <aside className="no-print fixed inset-y-0 left-0 z-20 hidden w-60 flex-col border-r-2 border-ink-900 bg-white lg:flex">
+      <aside className="no-print fixed inset-y-0 left-0 z-20 hidden w-60 flex-col border-r-[3px] border-ink-900 bg-surface lg:flex">
         <div className="px-5 pb-4 pt-6">
           <Logo />
         </div>
         <NavList />
-        <div className="border-t-2 border-ink-900 p-4">
+        <div className="border-t-[3px] border-ink-900 p-4">
           <ChefXp pct={pct} />
         </div>
       </aside>
 
-      {/* Mobile top app bar */}
-      <header className="no-print fixed inset-x-0 top-0 z-20 flex items-center justify-between gap-3 border-b-2 border-ink-900 bg-white px-4 py-2.5 lg:hidden">
+      <header className="no-print fixed inset-x-0 top-0 z-20 flex items-center justify-between gap-3 border-b-[3px] border-ink-900 bg-surface px-4 py-2.5 lg:hidden">
         <Logo compact />
         <div className="flex shrink-0 items-center gap-2">
           <ProgressRing pct={pct} size={36} stroke={4} />
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-ink-900 bg-white shadow-press transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+            className="flex h-12 w-12 items-center justify-center rounded-xl border-[3px] border-ink-900 bg-surface shadow-press transition-all duration-75 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             aria-label="Open menu"
             onClick={() => setDrawerOpen(true)}
           >
-            <Menu size={20} />
+            <Menu size={22} />
           </button>
         </div>
       </header>
 
-      {/* Mobile slide-over drawer */}
       {drawerOpen && (
         <div className="no-print fixed inset-0 z-40 lg:hidden">
           <button
@@ -155,28 +169,28 @@ export default function Layout() {
           />
           <div
             data-testid="mobile-drawer"
-            className="absolute inset-y-0 left-0 flex w-[85%] max-w-xs flex-col border-r-2 border-ink-900 bg-white pb-[env(safe-area-inset-bottom)]"
+            className="absolute inset-y-0 left-0 flex w-[85%] max-w-xs flex-col border-r-[3px] border-ink-900 bg-surface pb-[env(safe-area-inset-bottom)]"
           >
             <div className="flex items-center justify-between px-5 pb-4 pt-5">
               <Logo />
               <button
                 type="button"
-                className="flex h-9 w-9 items-center justify-center rounded-xl border-2 border-ink-900 bg-white shadow-press"
+                className="flex h-12 w-12 items-center justify-center rounded-xl border-[3px] border-ink-900 bg-surface shadow-press"
                 aria-label="Close menu"
                 onClick={() => setDrawerOpen(false)}
               >
-                <X size={18} />
+                <X size={20} />
               </button>
             </div>
             <NavList onNavigate={() => setDrawerOpen(false)} />
-            <div className="border-t-2 border-ink-900 p-4">
+            <div className="border-t-[3px] border-ink-900 p-4">
               <ChefXp pct={pct} />
             </div>
           </div>
         </div>
       )}
 
-      <main className="min-w-0 flex-1 pt-16 lg:ml-60 lg:pt-0 print:ml-0 print:pt-0">
+      <main className="min-w-0 flex-1 pt-[76px] lg:ml-60 lg:pt-0 print:ml-0 print:pt-0">
         <div className="mx-auto max-w-6xl px-4 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-8 lg:py-8">
           <Outlet />
         </div>
@@ -189,8 +203,8 @@ export function PageHeader({ title, subtitle, right }: { title: string; subtitle
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{title}</h1>
-        {subtitle && <p className="mt-1 max-w-2xl text-sm text-ink-500">{subtitle}</p>}
+        <h1 className="font-display text-[28px] leading-[1.05] sm:text-[34px]">{title}</h1>
+        {subtitle && <p className="mt-2 max-w-2xl text-base text-ink-700">{subtitle}</p>}
       </div>
       {right}
     </div>
@@ -199,7 +213,10 @@ export function PageHeader({ title, subtitle, right }: { title: string; subtitle
 
 export function BackLink({ to, label }: { to: string; label: string }) {
   return (
-    <NavLink to={to} className="mb-4 inline-flex items-center gap-1 text-sm font-medium text-copper-600 hover:text-copper-700">
+    <NavLink
+      to={to}
+      className="mb-4 inline-flex min-h-tap items-center gap-1 text-base font-bold text-copper-700 hover:text-ink-900"
+    >
       ← {label}
     </NavLink>
   )
