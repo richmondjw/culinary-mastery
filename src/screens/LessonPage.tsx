@@ -3,6 +3,8 @@ import { AlertTriangle, Check, ChefHat, Dumbbell, Eye, Repeat, UtensilsCrossed }
 import { BackLink, PageHeader } from '../components/Layout'
 import { Pill, SectionTitle } from '../components/ui'
 import { moduleById, recipeById, techniques } from '../data'
+import { videosFor } from '../data/videos'
+import { VideoPanel } from '../components/VideoEmbed'
 import { useUserStore } from '../store/useUserStore'
 import { shortDate } from '../lib/format'
 
@@ -18,6 +20,10 @@ export default function LessonPage() {
   const nextLesson = m.lessons[idx + 1]
   const doneAt = data.lessonsCompleted[lesson.id]
   const lessonTechniques = techniques.filter((t) => lesson.techniqueIds.includes(t.id))
+  // One clip per technique this lesson teaches — the "show me" companion to the written steps.
+  const lessonClips = lessonTechniques
+    .map((t) => ({ technique: t, clips: videosFor(t.id) }))
+    .filter((x) => x.clips.length > 0)
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -47,6 +53,28 @@ export default function LessonPage() {
             ))}
           </section>
         ))}
+
+        {lessonClips.length > 0 && (
+          <section className="card p-6">
+            <h2 className="mb-1 flex items-center gap-2 font-display text-lg font-semibold">
+              <Eye size={18} className="text-copper-500" /> Watch first
+            </h2>
+            <p className="mb-3 text-xs text-ink-500">
+              See the technique, then read the steps, then do it. Video is a companion to the method below — not a
+              replacement for it.
+            </p>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {lessonClips.map(({ technique, clips }) => (
+                <div key={technique.id}>
+                  <div className="mb-1.5 text-2xs font-bold uppercase tracking-wider text-copper-600">
+                    {technique.name}
+                  </div>
+                  <VideoPanel videos={clips} compact />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {lesson.demonstrations.map((d, i) => (
           <section key={i} className="card p-6">

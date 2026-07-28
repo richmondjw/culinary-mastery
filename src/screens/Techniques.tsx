@@ -1,21 +1,28 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Search } from 'lucide-react'
+import { Search, Video } from 'lucide-react'
 import { PageHeader } from '../components/Layout'
 import { Pill } from '../components/ui'
 import { recipes, techniques } from '../data'
+import { videosFor } from '../data/videos'
+import { VideoPanel } from '../components/VideoEmbed'
 
 export default function Techniques() {
   const [q, setQ] = useState('')
   const [category, setCategory] = useState('')
+  const [videoOnly, setVideoOnly] = useState(false)
+  const [openVideo, setOpenVideo] = useState<string | null>(null)
   const categories = useMemo(() => [...new Set(techniques.map((t) => t.category))], [])
 
   const filtered = techniques.filter((t) => {
     if (category && t.category !== category) return false
+    if (videoOnly && videosFor(t.id).length === 0) return false
     const ql = q.toLowerCase()
     if (ql && !t.name.toLowerCase().includes(ql) && !t.summary.toLowerCase().includes(ql)) return false
     return true
   })
+
+  const withVideo = techniques.filter((t) => videosFor(t.id).length > 0).length
 
   return (
     <div>
@@ -37,11 +44,21 @@ export default function Techniques() {
             </option>
           ))}
         </select>
+        <button
+          type="button"
+          onClick={() => setVideoOnly((v) => !v)}
+          className={videoOnly ? 'btn-primary' : 'btn-secondary'}
+          title="Show only techniques that have a video"
+        >
+          <Video size={15} /> With video ({withVideo})
+        </button>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {filtered.map((t) => {
           const usedIn = recipes.filter((r) => r.techniqueIds.includes(t.id))
+          const clips = videosFor(t.id)
+          const isOpen = openVideo === t.id
           return (
             <div key={t.id} id={t.id} className="card scroll-mt-6 p-5">
               <div className="mb-1 flex items-center justify-between gap-2">
@@ -54,6 +71,23 @@ export default function Techniques() {
                   <li key={i}>{k}</li>
                 ))}
               </ul>
+
+              {clips.length > 0 && (
+                <div className="mt-3">
+                  {isOpen ? (
+                    <>
+                      <VideoPanel videos={clips} compact />
+                      <button type="button" className="btn-ghost mt-1 !text-2xs" onClick={() => setOpenVideo(null)}>
+                        Hide video
+                      </button>
+                    </>
+                  ) : (
+                    <button type="button" className="btn-secondary !py-1.5 text-xs" onClick={() => setOpenVideo(t.id)}>
+                      <Video size={14} /> Watch{clips.length > 1 ? ` (${clips.length})` : ''}
+                    </button>
+                  )}
+                </div>
+              )}
               {usedIn.length > 0 && (
                 <div className="mt-3 border-t border-parchment-100 pt-2">
                   <div className="mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-400">Practised in</div>
