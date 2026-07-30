@@ -58,8 +58,11 @@ export default function AssessmentPage() {
 
       {submitted !== null && (
         <div
-          className={`mb-6 flex items-center gap-3 rounded-2xl p-4 ${
-            submitted ? 'bg-sage-100 text-sage-700' : 'bg-red-50 text-wine-600'
+          // Same fills the design system uses for the pass and retake pills, so the
+          // banner and the pill on the module page agree. Ink text on both — these are
+          // accent fills, and the glyph beside them carries the state without colour.
+          className={`mb-6 flex items-center gap-3 rounded-2xl border-[3px] border-ink-900 p-4 text-ink-900 ${
+            submitted ? 'bg-sage-600' : 'bg-wine-500'
           }`}
         >
           {submitted ? <CheckCircle2 size={22} /> : <XCircle size={22} />}
@@ -67,7 +70,7 @@ export default function AssessmentPage() {
             <div className="font-semibold">
               {submitted ? `Passed — ${total}/${maxTotal}. Well cooked.` : `Not yet — ${total}/${maxTotal}.`}
             </div>
-            <div className="text-sm opacity-80">
+            <div className="text-sm">
               {submitted
                 ? 'The module is marked passed. Repetition still pays: retake it in a month and beat your score.'
                 : 'Review the common mistakes, practise the weakest criterion, and retake when ready. Attempts are kept.'}
