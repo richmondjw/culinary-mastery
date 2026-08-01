@@ -1,0 +1,18 @@
+name = "sizzle-edge"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+
+# Route: the Worker sits in front of the whole custom domain.
+# Zone: optiflows.com.au
+routes = [
+  { pattern = "cook.optiflows.com.au/*", zone_name = "optiflows.com.au" }
+]
+
+# Secrets (set with `npx wrangler secret put <NAME>`, never in this file):
+#   LEMONSQUEEZY_API_KEY  - server-side licence validation
+#   ENTITLEMENT_SECRET    - HMAC key for the signed entitlement cookie
+
+# Conversion counters (unlock attempts/successes/failures, gated-asset 402s):
+# use Workers Analytics Engine once the Worker is captured here.
+# [[analytics_engine_datasets]]
+# binding = "CONVERSIONS"
