@@ -1,0 +1,30 @@
+# Public crawl policy for cook.optiflows.com.au.
+# Kept in the Vite public directory so it survives a Cloudflare DNS-only cutover.
+
+User-agent: *
+Allow: /
+
+# Do not permit the named automated agents to use site content for AI training.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
