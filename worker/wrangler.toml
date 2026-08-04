@@ -16,3 +16,5 @@ routes = [
 # use Workers Analytics Engine once the Worker is captured here.
 # [[analytics_engine_datasets]]
 # binding = "CONVERSIONS"
+# Enable only after the captured Worker writes privacy-safe counters. Suggested shape:
+# env.CONVERSIONS.writeDataPoint({ indexes: ["unlock_attempt"], doubles: [1] })

@@ -23,18 +23,18 @@ import { overallPct } from '../lib/progress'
 import { ProgressRing } from './ui'
 
 const nav = [
-  { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { to: '/modules', label: 'Course', icon: GraduationCap },
-  { to: '/recipes', label: 'Recipes', icon: UtensilsCrossed },
-  { to: '/techniques', label: 'Techniques', icon: ChefHat },
-  { to: '/notes', label: 'Journal', icon: NotebookPen },
-  { to: '/lists', label: 'Lists', icon: ListChecks },
-  { to: '/costing', label: 'Costing', icon: Calculator },
-  { to: '/menu-designer', label: 'Menu Designer', icon: ScrollText },
-  { to: '/planner', label: 'Planner', icon: ClipboardList },
-  { to: '/achievements', label: 'Achievements', icon: Award },
-  { to: '/capstone', label: 'Capstone', icon: Crown },
-  { to: '/portfolio', label: 'Portfolio', icon: Camera },
+  { to: '/app', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/app/modules', label: 'Course', icon: GraduationCap },
+  { to: '/app/recipes', label: 'Recipes', icon: UtensilsCrossed },
+  { to: '/app/techniques', label: 'Techniques', icon: ChefHat },
+  { to: '/app/notes', label: 'Journal', icon: NotebookPen },
+  { to: '/app/lists', label: 'Lists', icon: ListChecks },
+  { to: '/app/costing', label: 'Costing', icon: Calculator },
+  { to: '/app/menu-designer', label: 'Menu Designer', icon: ScrollText },
+  { to: '/app/planner', label: 'Planner', icon: ClipboardList },
+  { to: '/app/achievements', label: 'Achievements', icon: Award },
+  { to: '/app/capstone', label: 'Capstone', icon: Crown },
+  { to: '/app/portfolio', label: 'Portfolio', icon: Camera },
 ]
 
 function useAchievementWatcher() {
@@ -111,7 +111,7 @@ function ChefXp({ pct }: { pct: number }) {
           {pct >= 100 ? 'HEAD CHEF' : 'KEEP COOKING'}
         </div>
       </div>
-      <NavLink to="/settings" className="-m-2 flex h-11 w-11 items-center justify-center text-ink-500 hover:text-copper-700" title="Settings">
+      <NavLink to="/app/settings" className="-m-2 flex h-11 w-11 items-center justify-center text-ink-500 hover:text-copper-700" title="Settings">
         <Settings size={18} />
       </NavLink>
     </div>

@@ -1,0 +1,3 @@
+# Local-only Worker secrets. Copy to .dev.vars; do not commit the copy.
+LEMONSQUEEZY_API_KEY=
+ENTITLEMENT_SECRET=

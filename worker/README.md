@@ -6,14 +6,17 @@ exists **only in the Cloudflare dashboard**. This directory is its version-contr
 
 ## Status
 
-- [ ] **Capture step (needs Cloudflare dashboard access):** copy the current live
-      Worker script (the one serving the "SIZZLE — Private access" page and handling
-      `POST /__auth`) into `worker/src/index.ts`, then commit.
+- [ ] **Capture step (needs Cloudflare dashboard access):** replace the deliberate
+      503 safety stub at `worker/src/index.ts` with the current live Worker script
+      (the one serving the "SIZZLE — Private access" page and handling `POST /__auth`),
+      then commit. Preserve its bindings, but never paste secrets into source.
 - [ ] Deploy from here with `wrangler deploy`; retire dashboard edits as the change path.
 
 No Cloudflare API token was available in the build environment, so the live script
-could not be exported automatically. The capture step is a 5-minute manual copy-paste
-by anyone logged into the Cloudflare dashboard.
+could not be exported automatically. **Do not deploy this scaffold:** the stub returns
+503 intentionally and exists solely to make the capture target, contract and source
+layout explicit. The capture step is a 5-minute manual copy-paste by anyone logged
+into the Cloudflare dashboard.
 
 ## Planned shape (per docs/URL-MAP.md)
 
@@ -34,4 +37,13 @@ cd worker
 npx wrangler deploy          # deploys to the route in wrangler.toml
 npx wrangler tail            # live logs
 npx wrangler secret put LEMONSQUEEZY_API_KEY
+npx wrangler secret put ENTITLEMENT_SECRET
 ```
+
+## Analytics Engine (after capture only)
+
+`wrangler.toml` contains a commented `CONVERSIONS` binding. After the captured Worker
+has been reviewed, enable it and write one data point for each unlock attempt, unlock
+success, unlock failure (with a bounded reason code), and gated-content denial. Do not
+log licence keys, IP addresses, emails, or raw request URLs. Browser analytics is
+separate and remains inactive until a provider and measurement ID are selected.
