@@ -1,25 +1,31 @@
+import { lazy, Suspense } from 'react'
 import { HashRouter, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import Layout from './components/Layout'
-import Dashboard from './screens/Dashboard'
-import Modules from './screens/Modules'
-import ModuleDetail from './screens/ModuleDetail'
-import LessonPage from './screens/LessonPage'
-import AssessmentPage from './screens/AssessmentPage'
-import Recipes from './screens/Recipes'
-import RecipeDetail from './screens/RecipeDetail'
-import Techniques from './screens/Techniques'
-import Notes from './screens/Notes'
-import Lists from './screens/Lists'
-import Costing from './screens/Costing'
-import MenuDesigner from './screens/MenuDesigner'
-import Planner from './screens/Planner'
-import Achievements from './screens/Achievements'
-import Capstone from './screens/Capstone'
-import Portfolio from './screens/Portfolio'
-import SettingsPage from './screens/SettingsPage'
 import Landing from './screens/Landing'
 import { FullKitchenAccessGate, ModuleAccessGate } from './components/AccessGate'
 import { moduleById, moduleForRecipe } from './data'
+
+const Dashboard = lazy(() => import('./screens/Dashboard'))
+const Modules = lazy(() => import('./screens/Modules'))
+const ModuleDetail = lazy(() => import('./screens/ModuleDetail'))
+const LessonPage = lazy(() => import('./screens/LessonPage'))
+const AssessmentPage = lazy(() => import('./screens/AssessmentPage'))
+const Recipes = lazy(() => import('./screens/Recipes'))
+const RecipeDetail = lazy(() => import('./screens/RecipeDetail'))
+const Techniques = lazy(() => import('./screens/Techniques'))
+const Notes = lazy(() => import('./screens/Notes'))
+const Lists = lazy(() => import('./screens/Lists'))
+const Costing = lazy(() => import('./screens/Costing'))
+const MenuDesigner = lazy(() => import('./screens/MenuDesigner'))
+const Planner = lazy(() => import('./screens/Planner'))
+const Achievements = lazy(() => import('./screens/Achievements'))
+const Capstone = lazy(() => import('./screens/Capstone'))
+const Portfolio = lazy(() => import('./screens/Portfolio'))
+const SettingsPage = lazy(() => import('./screens/SettingsPage'))
+
+function RouteLoading() {
+  return <main className="min-h-screen bg-ink-50" aria-busy="true" />
+}
 
 function ModuleRoute({ children }: { children: React.ReactNode }) {
   const { id } = useParams()
@@ -41,7 +47,8 @@ function LegacyAppRedirect() {
 export default function App() {
   return (
     <HashRouter>
-      <Routes>
+      <Suspense fallback={<RouteLoading />}>
+        <Routes>
         <Route path="/" element={<Landing />} />
         <Route element={<Layout />}>
           <Route path="/app" element={<Dashboard />} />
@@ -77,7 +84,8 @@ export default function App() {
           <Route path="/settings/*" element={<LegacyAppRedirect />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </HashRouter>
   )
 }
