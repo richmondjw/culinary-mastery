@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "asset": "confidence-square",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "asset": "confidence-portrait",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "asset": "costing-square",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "surface": "landing",
+      "width": 1440,
+      "overflow": false,
+      "checkout": "disabled correctly"
+    },
+    {
+      "surface": "landing",
+      "width": 390,
+      "overflow": false,
+      "checkout": "disabled correctly"
+    },
+    {
+      "case": "POST-success-with-free-session",
+      "result": "activation denied"
+    },
+    {
+      "case": "mock-paid-session",
+      "result": "activation UI confirmed; not a live transaction"
+    }
+  ],
+  "errors": []
+}

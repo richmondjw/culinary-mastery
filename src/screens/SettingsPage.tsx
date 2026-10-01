@@ -81,7 +81,7 @@ export default function SettingsPage() {
       </section>
 
       <p className="mt-6 text-center text-sm text-ink-500">
-        SIZZLE · local-first, no accounts, no servers · currency AUD · GST 10% defaults
+        SIZZLE · learning data stays on this device · currency AUD · GST 10% defaults
       </p>
     </div>
   )

@@ -1,9 +1,10 @@
 import { lazy, Suspense } from 'react'
-import { HashRouter, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
-import Layout from './components/Layout'
+import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
+const Layout = lazy(() => import('./components/Layout'))
 import Landing from './screens/Landing'
-import { FullKitchenAccessGate, ModuleAccessGate } from './components/AccessGate'
-import { moduleById, moduleForRecipe } from './data'
+import { FullKitchenAccessGate } from './components/AccessGate'
+const ModuleRoute = lazy(() => import('./components/ContentRoutes').then(m => ({ default: m.ModuleRoute })))
+const RecipeRoute = lazy(() => import('./components/ContentRoutes').then(m => ({ default: m.RecipeRoute })))
 
 const Dashboard = lazy(() => import('./screens/Dashboard'))
 const Modules = lazy(() => import('./screens/Modules'))
@@ -24,19 +25,7 @@ const Portfolio = lazy(() => import('./screens/Portfolio'))
 const SettingsPage = lazy(() => import('./screens/SettingsPage'))
 
 function RouteLoading() {
-  return <main className="min-h-screen bg-ink-50" aria-busy="true" />
-}
-
-function ModuleRoute({ children }: { children: React.ReactNode }) {
-  const { id } = useParams()
-  const module = id ? moduleById.get(id) : undefined
-  return module ? <ModuleAccessGate moduleNumber={module.number}>{children}</ModuleAccessGate> : <>{children}</>
-}
-
-function RecipeRoute({ children }: { children: React.ReactNode }) {
-  const { id } = useParams()
-  const module = id ? moduleForRecipe(id) : undefined
-  return module ? <ModuleAccessGate moduleNumber={module.number}>{children}</ModuleAccessGate> : <>{children}</>
+  return <main className="min-h-screen bg-parchment-50 p-8" aria-busy="true" role="status">Loading your kitchen…</main>
 }
 
 function LegacyAppRedirect() {
