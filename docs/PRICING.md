@@ -1,6 +1,6 @@
 # SIZZLE — Pricing & tiers (decision doc)
 
-**Status:** RECOMMENDED — awaiting James's lock (Asana: "DECISION: lock pricing and tiers")
+**Status:** APPROVED — James: “Approved implement”, 2026-07-31, Asana task 1217047529434654. Reconciled with the source decision 2026-10-01. Live checkout and tax configuration remain unverified.
 **Drafted:** 2026-08-01 by Remy (dispatch 1217084429287725)
 **Sources:** Asana backlog cards "Launch pricing…", "Home Cook -> Full Kitchen upgrade path",
 "Set up Lemon Squeezy store…" — the substance was already decided; this doc locks it in one place.
@@ -19,7 +19,7 @@
 | Upgrade | — | Pays the **A$70 difference**; existing key upgraded in place via Lemon Squeezy. No second key. |
 
 Both tiers are **lifetime, one-time purchase**. No subscription. That is part of the
-product's pitch ("local-first, yours forever") and keeps support surface near zero.
+product's pitch ("local-first, yours forever") and avoids recurring billing. Support demand has not yet been measured.
 
 ## Rules that are part of the decision (not details)
 

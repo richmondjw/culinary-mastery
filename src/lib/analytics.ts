@@ -3,7 +3,7 @@
  * unless VITE_ANALYTICS_MEASUREMENT_ID is set and a host integration registers
  * window.sizzleAnalytics. Keep conversion authority in the Worker.
  */
-export type AnalyticsEvent = 'page_view' | 'unlock_attempt' | 'gated_content_denied'
+export type AnalyticsEvent = 'page_view' | 'unlock_attempt' | 'gated_content_denied' | 'checkout_started' | 'free_course_started'
 export type AnalyticsProperties = Record<string, string | number | boolean | undefined>
 
 declare global {
