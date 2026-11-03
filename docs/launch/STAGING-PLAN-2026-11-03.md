@@ -1,6 +1,6 @@
 # SIZZLE staging and app release plan — 2026-11-03
 
-Status: source review complete; remote staging NOT deployed. This document does not certify a new build or test run.
+Status: source review and fresh cloud typecheck, six unit tests and production build passed. Remote staging NOT deployed; fresh visual/mobile/browser smoke testing remains pending. See [verification report](VERIFICATION-2026-11-03.md).
 
 ## Source and constraints
 
@@ -8,9 +8,9 @@ Continue draft PR #1, launch/sizzle-market-readiness-20261001 at d63f7083d42749d
 
 Reviewed README, HANDOVER-CODEX, launch STATUS/COMMERCE-CONTRACT/DOMAIN-READINESS, package scripts, deployment workflow and importBackup. Recursive repository tree contains no AGENTS.md, .agents/skills, staging workflow, web manifest or service worker. Only main and the existing launch branch were returned before creating this branch. No authenticated hosting inventory was available; absence in source is not proof that an external staging service does not exist.
 
-Parent verified cook.optiflows.com.au today as a SIZZLE password gate. Parent also reports cookwithsizzle.com was registered October 4. The October 1 domain-readiness note is historical, not evidence that a new registration is needed. Preserve both domains and DNS. public/CNAME and worker/wrangler.toml are deployment clues, not proof of staging ownership or current live Worker code. Never deploy worker/src/index.ts: it is a deliberate 503 stub.
+A clean browser verified cook.optiflows.com.au today as a SIZZLE private-access password gate. Project history records cookwithsizzle.com registration on October 4; this browser returned an upstream connection failure, which does not establish ownership or DNS state. The October 1 domain-readiness note is historical, not evidence that a new registration is needed. Preserve both domains and DNS. public/CNAME and worker/wrangler.toml are deployment clues, not proof of staging ownership or current live Worker code. Never deploy worker/src/index.ts: it is a deliberate 503 stub.
 
-The October 1 STATUS records a passing production build/typecheck, six unit tests and mobile/desktop checks. Those are historical results only. Current scripts provide typecheck, build and test. Runtime verification remains pending.
+Fresh cloud verification on November 3 passed dependency installation, typecheck, all six unit tests and production build for d63f7083d42749de8719fed63a1b8c0aef6732e8. All 101 fetched files were checked against GitHub blob SHAs before and after testing. The October 1 mobile/desktop checks remain historical only. A cloud loopback preview started, but the separate browser could not connect; fresh visual and route smoke checks remain pending.
 
 ## Stages and acceptance gates
 
@@ -26,7 +26,7 @@ Stage 1 comes first. Do not delay its verification for speculative payment or pl
 
 ## Exact staging verification checklist
 
-- Restore authorised build execution; npm ci, npm run typecheck, npm test, npm run build. Record timestamp, Node version, SHA and output.
+- Cloud dependency installation, npm run typecheck, npm test and npm run build passed for the exact source SHA; see the verification report for runtime and scope. Repeat on any app-code change.
 - Confirm checkout remains disabled for missing, HTML, error and invalid readiness responses; no real purchase or live licence data.
 - Use a fresh test browser origin. Test landing, free modules/lessons, cost tool, settings, export/import and navigation on desktop and 390px mobile; inspect page errors and horizontal overflow.
 - Verify access denial from a clean unauthenticated client for HTML, JS/data assets and any direct origin; robots/noindex alone is not privacy.
@@ -35,8 +35,8 @@ Stage 1 comes first. Do not delay its verification for speculative payment or pl
 
 ## Current blockers and next action
 
-The local workspace was empty. Initial git clone failed to connect to github.com:443. Subsequently the parent supplied a restriction that this Windows execution account had previously failed CreateProcessWithLogonW with error 1909 and must not be retried without recovery evidence. No further shell execution was attempted after that instruction. GitHub connector reads/writes work independently.
+The remaining remote-staging blocker is authenticated hosting inventory and verification of an isolated protected non-production target. Cloudflare dashboard is signed out and no Cloudflare connector was found. Confirm the existing hosting project, intended audience, protection of HTML/assets/alternate origins and prior deployment rollback before publishing. No remote staging URL is claimed.
 
-Build/typecheck/tests/browser smoke checks therefore have not been rerun, and no local preview or remote staging URL is claimed. No Cloudflare management connector is available in this task; source does not identify an isolated protected deployment. Next required evidence is restored authorised execution and the existing non-production hosting target/access configuration (or narrowly approved setup of one). Do not request secrets in chat and do not publish an unprotected public copy.
+Local Windows execution remains unavailable, but an authorised cloud workspace completed dependency installation, typecheck, tests and build. Fresh browser/mobile/desktop visual QA is still pending because the separate browser could not connect to the cloud loopback preview. Do not request secrets in chat or publish an unprotected public copy. Production, DNS, Worker and payment constraints remain in force.
 
 Source inspection found importBackup replaces store data before awaiting photo import and trusts nested data after a top-level discriminator check. This is a concrete Stage 2 risk, not a tested fix.
